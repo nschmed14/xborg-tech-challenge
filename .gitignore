@@ -2,6 +2,8 @@
 node_modules/
 /.pnp
 .pnp.js
+package-lock.json
+yarn.lock
 
 # Testing
 /coverage
@@ -15,6 +17,7 @@ node_modules/
 # Database
 *.db
 *.sqlite
+*.sqlite3
 
 # Environment
 .env.local
@@ -41,3 +44,10 @@ yarn-error.log*
 
 # OS files
 Thumbs.db
+
+# Next.js build output
+.next/
+out/
+
+# Build caches
+.cache/

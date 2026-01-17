@@ -1,57 +1,69 @@
-export default function Home() {
+'use client';
+
+export default function HomePage() {
+  const handleGoogleLogin = () => {
+    // Redirect to backend Google OAuth endpoint
+    window.location.href = 'http://localhost:3001/auth/login/google';
+  };
+
+  const handleTestLogin = () => {
+    // Redirect to test login endpoint
+    window.location.href = 'http://localhost:3001/auth/test-login';
+  };
+
   return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-        XBorg Technical Challenge ?
-      </h1>
-      <p style={{ fontSize: '1.125rem', color: '#6b7280', marginBottom: '2rem' }}>
-        Full-stack user profile management application
-      </p>
+    <div style={{ padding: '2rem', maxWidth: '600px', margin: '0 auto' }}>
+      <h1>XBorg Technical Challenge</h1>
+      <p>Welcome to the user profile management system.</p>
       
-      <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-        <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '0.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', width: '300px' }}>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#10b981' }}>Backend API</h2>
-          <p style={{ fontWeight: '600' }}>http://localhost:3001</p>
-          <p style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '1rem' }}>
-            <strong>Endpoints:</strong>
-            <ul style={{ textAlign: 'left', marginLeft: '1rem', marginTop: '0.5rem' }}>
-              <li>GET /auth/login/google</li>
-              <li>GET /auth/validate/google</li>
-              <li>GET /user/profile</li>
-              <li>PUT /user/profile</li>
-            </ul>
-          </p>
-        </div>
+      <div style={{ marginTop: '2rem', padding: '2rem', border: '1px solid #ccc', borderRadius: '8px' }}>
+        <h2>Sign In</h2>
+        <p>For testing purposes, use the test login button:</p>
         
-        <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '0.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', width: '300px' }}>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#10b981' }}>Frontend</h2>
-          <p style={{ fontWeight: '600' }}>http://localhost:3000</p>
-          <p style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '1rem' }}>
-            <strong>Features:</strong>
-            <ul style={{ textAlign: 'left', marginLeft: '1rem', marginTop: '0.5rem' }}>
-              <li>Google OAuth authentication</li>
-              <li>JWT session management</li>
-              <li>Profile management</li>
-              <li>Persistent sessions</li>
-            </ul>
-          </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+          <button
+            onClick={handleTestLogin}
+            style={{
+              padding: '0.75rem 1.5rem',
+              backgroundColor: '#48bb78',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              fontSize: '16px',
+              cursor: 'pointer',
+            }}
+          >
+            Test Login (Development)
+          </button>
+          
+          <div style={{ textAlign: 'center', color: '#666' }}>or</div>
+          
+          <button
+            onClick={handleGoogleLogin}
+            style={{
+              padding: '0.75rem 1.5rem',
+              backgroundColor: '#4285f4',
+              color: 'white',
+              border: 'none',
+              borderRadius: '4px',
+              fontSize: '16px',
+              cursor: 'pointer',
+            }}
+          >
+            Sign in with Google (Requires OAuth Setup)
+          </button>
         </div>
       </div>
       
-      <div style={{ maxWidth: '48rem', margin: '3rem auto 0', backgroundColor: 'white', padding: '2rem', borderRadius: '0.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>Quick Test</h2>
-        <p style={{ color: '#6b7280', marginBottom: '1.5rem' }}>
-          To test the backend API, open a new terminal and run:
-        </p>
-        <div style={{ backgroundColor: '#f3f4f6', padding: '1rem', borderRadius: '0.375rem', fontFamily: 'monospace', textAlign: 'left', fontSize: '0.875rem' }}>
-          curl -X POST http://localhost:3001/auth/test-login \<br />
-          &nbsp;&nbsp;-H "Content-Type: application/json" \<br />
-          &nbsp;&nbsp;-d '{"email":"test@example.com","firstName":"Test","lastName":"User"}'
-        </div>
-        <p style={{ color: '#6b7280', marginTop: '1.5rem', fontSize: '0.875rem' }}>
-          This will return a JWT token for testing protected endpoints.
-        </p>
+      <div style={{ marginTop: '2rem', fontSize: '14px', color: '#666' }}>
+        <p>This application demonstrates:</p>
+        <ul>
+          <li>Google OAuth 2.0 authentication</li>
+          <li>JWT token-based authorization</li>
+          <li>User profile management</li>
+          <li>Persistent sessions</li>
+        </ul>
       </div>
     </div>
-  )
+  );
 }

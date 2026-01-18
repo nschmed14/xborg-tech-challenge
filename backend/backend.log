@@ -1,0 +1,661 @@
+
+> backend@0.0.1 start:dev
+> nest start --watch
+
+[2J[3J[H[[90m12:38:12 AM[0m] Starting compilation in watch mode...
+
+[96msrc/user/user.service.ts[0m:[93m15[0m:[93m64[0m - [91merror[0m[90m TS2322: [0mType 'number' is not assignable to type 'string | FindOperator<string>'.
+
+[7m15[0m     const user = await this.usersRepository.findOne({ where: { id } });
+[7m  [0m [91m                                                               ~~[0m
+
+[[90m12:38:15 AM[0m] Found 1 error. Watching for file changes.
+
+[2J[3J[H[[90m12:39:23 AM[0m] File change detected. Starting incremental compilation...
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'Array'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'Boolean'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'Function'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'IArguments'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'Number'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'Object'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'RegExp'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'String'.
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'babel__core'.
+  The file is in the program because:
+    Entry point for implicit type library 'babel__core'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'babel__generator'.
+  The file is in the program because:
+    Entry point for implicit type library 'babel__generator'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'babel__template'.
+  The file is in the program because:
+    Entry point for implicit type library 'babel__template'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'babel__traverse'.
+  The file is in the program because:
+    Entry point for implicit type library 'babel__traverse'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'bcryptjs'.
+  The file is in the program because:
+    Entry point for implicit type library 'bcryptjs'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'body-parser'.
+  The file is in the program because:
+    Entry point for implicit type library 'body-parser'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'connect'.
+  The file is in the program because:
+    Entry point for implicit type library 'connect'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'cookiejar'.
+  The file is in the program because:
+    Entry point for implicit type library 'cookiejar'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'eslint'.
+  The file is in the program because:
+    Entry point for implicit type library 'eslint'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'eslint-scope'.
+  The file is in the program because:
+    Entry point for implicit type library 'eslint-scope'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'estree'.
+  The file is in the program because:
+    Entry point for implicit type library 'estree'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'express'.
+  The file is in the program because:
+    Entry point for implicit type library 'express'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'express-serve-static-core'.
+  The file is in the program because:
+    Entry point for implicit type library 'express-serve-static-core'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'graceful-fs'.
+  The file is in the program because:
+    Entry point for implicit type library 'graceful-fs'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'http-errors'.
+  The file is in the program because:
+    Entry point for implicit type library 'http-errors'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'istanbul-lib-coverage'.
+  The file is in the program because:
+    Entry point for implicit type library 'istanbul-lib-coverage'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'istanbul-lib-report'.
+  The file is in the program because:
+    Entry point for implicit type library 'istanbul-lib-report'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'istanbul-reports'.
+  The file is in the program because:
+    Entry point for implicit type library 'istanbul-reports'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'jest'.
+  The file is in the program because:
+    Entry point for implicit type library 'jest'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'json-schema'.
+  The file is in the program because:
+    Entry point for implicit type library 'json-schema'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'jsonwebtoken'.
+  The file is in the program because:
+    Entry point for implicit type library 'jsonwebtoken'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'methods'.
+  The file is in the program because:
+    Entry point for implicit type library 'methods'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'mime'.
+  The file is in the program because:
+    Entry point for implicit type library 'mime'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'node'.
+  The file is in the program because:
+    Entry point for implicit type library 'node'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'oauth'.
+  The file is in the program because:
+    Entry point for implicit type library 'oauth'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport-google-oauth20'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport-google-oauth20'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport-jwt'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport-jwt'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport-oauth2'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport-oauth2'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport-strategy'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport-strategy'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'qs'.
+  The file is in the program because:
+    Entry point for implicit type library 'qs'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'range-parser'.
+  The file is in the program because:
+    Entry point for implicit type library 'range-parser'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'semver'.
+  The file is in the program because:
+    Entry point for implicit type library 'semver'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'send'.
+  The file is in the program because:
+    Entry point for implicit type library 'send'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'serve-static'.
+  The file is in the program because:
+    Entry point for implicit type library 'serve-static'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'stack-utils'.
+  The file is in the program because:
+    Entry point for implicit type library 'stack-utils'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'superagent'.
+  The file is in the program because:
+    Entry point for implicit type library 'superagent'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'supertest'.
+  The file is in the program because:
+    Entry point for implicit type library 'supertest'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'validator'.
+  The file is in the program because:
+    Entry point for implicit type library 'validator'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'yargs'.
+  The file is in the program because:
+    Entry point for implicit type library 'yargs'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'yargs-parser'.
+  The file is in the program because:
+    Entry point for implicit type library 'yargs-parser'
+
+[91merror[0m[90m TS6053: [0mFile '/workspaces/xborg-tech-challenge/backend/node_modules/typescript/lib/lib.es2021.full.d.ts' not found.
+  The file is in the program because:
+    Default library for target 'es2021'
+
+[[90m12:39:24 AM[0m] Found 50 errors. Watching for file changes.
+
+(node:124598) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+node:internal/modules/cjs/loader:1424
+  throw err;
+  ^
+
+Error: Cannot find module '@nestjs/core'
+Require stack:
+- /workspaces/xborg-tech-challenge/backend/dist/main.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.require (node:internal/modules/cjs/loader:1504:12)
+    at require (node:internal/modules/helpers:152:16)
+    at Object.<anonymous> (/workspaces/xborg-tech-challenge/backend/src/main.ts:1:1)
+    at Module._compile (node:internal/modules/cjs/loader:1761:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/workspaces/xborg-tech-challenge/backend/dist/main.js' ]
+}
+
+Node.js v24.11.1
+[2J[3J[H[[90m12:39:25 AM[0m] File change detected. Starting incremental compilation...
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'Array'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'Boolean'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'Function'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'IArguments'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'Number'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'Object'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'RegExp'.
+
+[91merror[0m[90m TS2318: [0mCannot find global type 'String'.
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'babel__core'.
+  The file is in the program because:
+    Entry point for implicit type library 'babel__core'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'babel__generator'.
+  The file is in the program because:
+    Entry point for implicit type library 'babel__generator'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'babel__template'.
+  The file is in the program because:
+    Entry point for implicit type library 'babel__template'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'babel__traverse'.
+  The file is in the program because:
+    Entry point for implicit type library 'babel__traverse'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'bcryptjs'.
+  The file is in the program because:
+    Entry point for implicit type library 'bcryptjs'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'body-parser'.
+  The file is in the program because:
+    Entry point for implicit type library 'body-parser'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'connect'.
+  The file is in the program because:
+    Entry point for implicit type library 'connect'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'cookiejar'.
+  The file is in the program because:
+    Entry point for implicit type library 'cookiejar'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'eslint'.
+  The file is in the program because:
+    Entry point for implicit type library 'eslint'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'eslint-scope'.
+  The file is in the program because:
+    Entry point for implicit type library 'eslint-scope'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'estree'.
+  The file is in the program because:
+    Entry point for implicit type library 'estree'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'express'.
+  The file is in the program because:
+    Entry point for implicit type library 'express'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'express-serve-static-core'.
+  The file is in the program because:
+    Entry point for implicit type library 'express-serve-static-core'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'graceful-fs'.
+  The file is in the program because:
+    Entry point for implicit type library 'graceful-fs'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'http-errors'.
+  The file is in the program because:
+    Entry point for implicit type library 'http-errors'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'istanbul-lib-coverage'.
+  The file is in the program because:
+    Entry point for implicit type library 'istanbul-lib-coverage'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'istanbul-lib-report'.
+  The file is in the program because:
+    Entry point for implicit type library 'istanbul-lib-report'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'istanbul-reports'.
+  The file is in the program because:
+    Entry point for implicit type library 'istanbul-reports'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'jest'.
+  The file is in the program because:
+    Entry point for implicit type library 'jest'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'json-schema'.
+  The file is in the program because:
+    Entry point for implicit type library 'json-schema'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'jsonwebtoken'.
+  The file is in the program because:
+    Entry point for implicit type library 'jsonwebtoken'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'methods'.
+  The file is in the program because:
+    Entry point for implicit type library 'methods'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'mime'.
+  The file is in the program because:
+    Entry point for implicit type library 'mime'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'node'.
+  The file is in the program because:
+    Entry point for implicit type library 'node'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'oauth'.
+  The file is in the program because:
+    Entry point for implicit type library 'oauth'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport-google-oauth20'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport-google-oauth20'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport-jwt'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport-jwt'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport-oauth2'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport-oauth2'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport-strategy'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport-strategy'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'qs'.
+  The file is in the program because:
+    Entry point for implicit type library 'qs'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'range-parser'.
+  The file is in the program because:
+    Entry point for implicit type library 'range-parser'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'semver'.
+  The file is in the program because:
+    Entry point for implicit type library 'semver'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'send'.
+  The file is in the program because:
+    Entry point for implicit type library 'send'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'serve-static'.
+  The file is in the program because:
+    Entry point for implicit type library 'serve-static'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'stack-utils'.
+  The file is in the program because:
+    Entry point for implicit type library 'stack-utils'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'superagent'.
+  The file is in the program because:
+    Entry point for implicit type library 'superagent'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'supertest'.
+  The file is in the program because:
+    Entry point for implicit type library 'supertest'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'validator'.
+  The file is in the program because:
+    Entry point for implicit type library 'validator'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'yargs'.
+  The file is in the program because:
+    Entry point for implicit type library 'yargs'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'yargs-parser'.
+  The file is in the program because:
+    Entry point for implicit type library 'yargs-parser'
+
+[91merror[0m[90m TS6053: [0mFile '/workspaces/xborg-tech-challenge/backend/node_modules/typescript/lib/lib.es2021.full.d.ts' not found.
+  The file is in the program because:
+    Default library for target 'es2021'
+
+[[90m12:39:25 AM[0m] Found 50 errors. Watching for file changes.
+
+node:internal/modules/cjs/loader:1424
+  throw err;
+  ^
+
+Error: Cannot find module '@nestjs/core'
+Require stack:
+- /workspaces/xborg-tech-challenge/backend/dist/main.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1421:15)
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.require (node:internal/modules/cjs/loader:1504:12)
+    at require (node:internal/modules/helpers:152:16)
+    at Object.<anonymous> (/workspaces/xborg-tech-challenge/backend/src/main.ts:1:1)
+    at Module._compile (node:internal/modules/cjs/loader:1761:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/workspaces/xborg-tech-challenge/backend/dist/main.js' ]
+}
+
+Node.js v24.11.1
+[2J[3J[H[[90m12:39:33 AM[0m] File change detected. Starting incremental compilation...
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'babel__core'.
+  The file is in the program because:
+    Entry point for implicit type library 'babel__core'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'babel__generator'.
+  The file is in the program because:
+    Entry point for implicit type library 'babel__generator'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'babel__template'.
+  The file is in the program because:
+    Entry point for implicit type library 'babel__template'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'babel__traverse'.
+  The file is in the program because:
+    Entry point for implicit type library 'babel__traverse'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'bcryptjs'.
+  The file is in the program because:
+    Entry point for implicit type library 'bcryptjs'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'body-parser'.
+  The file is in the program because:
+    Entry point for implicit type library 'body-parser'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'connect'.
+  The file is in the program because:
+    Entry point for implicit type library 'connect'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'cookiejar'.
+  The file is in the program because:
+    Entry point for implicit type library 'cookiejar'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'eslint'.
+  The file is in the program because:
+    Entry point for implicit type library 'eslint'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'eslint-scope'.
+  The file is in the program because:
+    Entry point for implicit type library 'eslint-scope'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'estree'.
+  The file is in the program because:
+    Entry point for implicit type library 'estree'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'express'.
+  The file is in the program because:
+    Entry point for implicit type library 'express'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'express-serve-static-core'.
+  The file is in the program because:
+    Entry point for implicit type library 'express-serve-static-core'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'graceful-fs'.
+  The file is in the program because:
+    Entry point for implicit type library 'graceful-fs'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'http-errors'.
+  The file is in the program because:
+    Entry point for implicit type library 'http-errors'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'istanbul-lib-coverage'.
+  The file is in the program because:
+    Entry point for implicit type library 'istanbul-lib-coverage'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'istanbul-lib-report'.
+  The file is in the program because:
+    Entry point for implicit type library 'istanbul-lib-report'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'istanbul-reports'.
+  The file is in the program because:
+    Entry point for implicit type library 'istanbul-reports'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'jest'.
+  The file is in the program because:
+    Entry point for implicit type library 'jest'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'json-schema'.
+  The file is in the program because:
+    Entry point for implicit type library 'json-schema'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'jsonwebtoken'.
+  The file is in the program because:
+    Entry point for implicit type library 'jsonwebtoken'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'methods'.
+  The file is in the program because:
+    Entry point for implicit type library 'methods'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'mime'.
+  The file is in the program because:
+    Entry point for implicit type library 'mime'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'node'.
+  The file is in the program because:
+    Entry point for implicit type library 'node'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'oauth'.
+  The file is in the program because:
+    Entry point for implicit type library 'oauth'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport-google-oauth20'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport-google-oauth20'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport-jwt'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport-jwt'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport-oauth2'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport-oauth2'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'passport-strategy'.
+  The file is in the program because:
+    Entry point for implicit type library 'passport-strategy'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'qs'.
+  The file is in the program because:
+    Entry point for implicit type library 'qs'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'range-parser'.
+  The file is in the program because:
+    Entry point for implicit type library 'range-parser'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'semver'.
+  The file is in the program because:
+    Entry point for implicit type library 'semver'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'send'.
+  The file is in the program because:
+    Entry point for implicit type library 'send'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'serve-static'.
+  The file is in the program because:
+    Entry point for implicit type library 'serve-static'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'stack-utils'.
+  The file is in the program because:
+    Entry point for implicit type library 'stack-utils'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'superagent'.
+  The file is in the program because:
+    Entry point for implicit type library 'superagent'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'supertest'.
+  The file is in the program because:
+    Entry point for implicit type library 'supertest'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'validator'.
+  The file is in the program because:
+    Entry point for implicit type library 'validator'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'yargs'.
+  The file is in the program because:
+    Entry point for implicit type library 'yargs'
+
+[91merror[0m[90m TS2688: [0mCannot find type definition file for 'yargs-parser'.
+  The file is in the program because:
+    Entry point for implicit type library 'yargs-parser'
+
+[[90m12:39:34 AM[0m] Found 41 errors. Watching for file changes.
+
+[2J[3J[H[[90m12:39:40 AM[0m] File change detected. Starting incremental compilation...
+
+[96msrc/user/user.service.ts[0m:[93m15[0m:[93m64[0m - [91merror[0m[90m TS2322: [0mType 'number' is not assignable to type 'string | FindOperator<string>'.
+
+[7m15[0m     const user = await this.usersRepository.findOne({ where: { id } });
+[7m  [0m [91m                                                               ~~[0m
+
+[[90m12:39:44 AM[0m] Found 1 error. Watching for file changes.
+
+[2J[3J[H[[90m12:39:46 AM[0m] File change detected. Starting incremental compilation...
+
+[96msrc/user/user.service.ts[0m:[93m15[0m:[93m64[0m - [91merror[0m[90m TS2322: [0mType 'number' is not assignable to type 'string | FindOperator<string>'.
+
+[7m15[0m     const user = await this.usersRepository.findOne({ where: { id } });
+[7m  [0m [91m                                                               ~~[0m
+
+[[90m12:39:47 AM[0m] Found 1 error. Watching for file changes.
+
+[2J[3J[H[[90m12:43:34 AM[0m] File change detected. Starting incremental compilation...
+
+[[90m12:43:34 AM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 127889  - [39m01/18/2026, 12:43:37 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 127889  - [39m01/18/2026, 12:43:37 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +35ms[39m
+[32m[Nest] 127889  - [39m01/18/2026, 12:43:37 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDatabaseModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 127889  - [39m01/18/2026, 12:43:37 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 127889  - [39m01/18/2026, 12:43:37 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 127889  - [39m01/18/2026, 12:43:37 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[31m[Nest] 127889  - [39m01/18/2026, 12:43:37 AM [31m  ERROR[39m [38;5;3m[ExceptionHandler] [39m[31mNest can't resolve dependencies of the AuthService (?, JwtService). Please make sure that the argument UserService at index [0] is available in the AuthModule context.
+
+Potential solutions:
+- Is AuthModule a valid NestJS module?
+- If UserService is a provider, is it part of the current AuthModule?
+- If UserService is exported from a separate @Module, is that module imported within AuthModule?
+  @Module({
+    imports: [ /* the Module containing UserService */ ]
+  })
+[39m
+Error: Nest can't resolve dependencies of the AuthService (?, JwtService). Please make sure that the argument UserService at index [0] is available in the AuthModule context.
+
+Potential solutions:
+- Is AuthModule a valid NestJS module?
+- If UserService is a provider, is it part of the current AuthModule?
+- If UserService is exported from a separate @Module, is that module imported within AuthModule?
+  @Module({
+    imports: [ /* the Module containing UserService */ ]
+  })
+
+    at Injector.lookupComponentInParentModules (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:262:19)
+    at async Injector.resolveComponentInstance (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:215:33)
+    at async resolveParam (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:129:38)
+    at async Promise.all (index 0)
+    at async Injector.resolveConstructorParams (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:144:27)
+    at async Injector.loadInstance (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:70:13)
+    at async Injector.loadProvider (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:98:9)
+    at async /workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:56:13
+    at async Promise.all (index 3)
+    at async InstanceLoader.createInstancesOfProviders (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:55:9)

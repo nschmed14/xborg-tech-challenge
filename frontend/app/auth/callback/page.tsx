@@ -1,40 +1,55 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/src/contexts/AuthContext';
 
 export default function AuthCallbackPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { login } = useAuth();
-  const [hasProcessed, setHasProcessed] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Only process once
-    if (hasProcessed) return;
-
-    const token = searchParams.get('token');
-    const userParam = searchParams.get('user');
+    // Get token and user from URL query params
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const userParam = urlParams.get('user');
 
     if (token && userParam) {
       try {
         const userData = JSON.parse(decodeURIComponent(userParam));
         login(token, userData);
-        setHasProcessed(true);
         
-        // Redirect after a short delay
+        // Redirect to profile
         setTimeout(() => {
           router.push('/profile');
         }, 100);
       } catch (error) {
         console.error('Error parsing user data:', error);
-        router.push('/auth/signin?error=invalid_response');
+        setError('Invalid authentication response');
+        setTimeout(() => {
+          router.push('/auth/signin?error=invalid_response');
+        }, 2000);
       }
     } else {
-      router.push('/auth/signin?error=missing_params');
+      setError('Missing authentication parameters');
+      setTimeout(() => {
+        router.push('/auth/signin?error=missing_params');
+      }, 2000);
     }
-  }, [searchParams, login, router, hasProcessed]);
+  }, [login, router]);
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center text-red-600">
+          <p className="text-xl font-semibold">Authentication Error</p>
+          <p className="mt-2">{error}</p>
+          <p className="text-sm text-gray-500 mt-4">Redirecting to sign in...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center">

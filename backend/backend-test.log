@@ -1,0 +1,55 @@
+
+> backend@0.0.1 start:dev
+> nest start --watch
+
+[2J[3J[H[[90m12:39:45 AM[0m] Starting compilation in watch mode...
+
+[96msrc/user/user.service.ts[0m:[93m15[0m:[93m64[0m - [91merror[0m[90m TS2322: [0mType 'number' is not assignable to type 'string | FindOperator<string>'.
+
+[7m15[0m     const user = await this.usersRepository.findOne({ where: { id } });
+[7m  [0m [91m                                                               ~~[0m
+
+[[90m12:39:50 AM[0m] Found 1 error. Watching for file changes.
+
+[2J[3J[H[[90m12:43:34 AM[0m] File change detected. Starting incremental compilation...
+
+[[90m12:43:35 AM[0m] Found 0 errors. Watching for file changes.
+
+(node:125945) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[32m[Nest] 127907  - [39m01/18/2026, 12:43:37 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 127907  - [39m01/18/2026, 12:43:37 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +37ms[39m
+[32m[Nest] 127907  - [39m01/18/2026, 12:43:37 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDatabaseModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 127907  - [39m01/18/2026, 12:43:37 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 127907  - [39m01/18/2026, 12:43:37 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 127907  - [39m01/18/2026, 12:43:37 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[31m[Nest] 127907  - [39m01/18/2026, 12:43:37 AM [31m  ERROR[39m [38;5;3m[ExceptionHandler] [39m[31mNest can't resolve dependencies of the AuthService (?, JwtService). Please make sure that the argument UserService at index [0] is available in the AuthModule context.
+
+Potential solutions:
+- Is AuthModule a valid NestJS module?
+- If UserService is a provider, is it part of the current AuthModule?
+- If UserService is exported from a separate @Module, is that module imported within AuthModule?
+  @Module({
+    imports: [ /* the Module containing UserService */ ]
+  })
+[39m
+Error: Nest can't resolve dependencies of the AuthService (?, JwtService). Please make sure that the argument UserService at index [0] is available in the AuthModule context.
+
+Potential solutions:
+- Is AuthModule a valid NestJS module?
+- If UserService is a provider, is it part of the current AuthModule?
+- If UserService is exported from a separate @Module, is that module imported within AuthModule?
+  @Module({
+    imports: [ /* the Module containing UserService */ ]
+  })
+
+    at Injector.lookupComponentInParentModules (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:262:19)
+    at async Injector.resolveComponentInstance (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:215:33)
+    at async resolveParam (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:129:38)
+    at async Promise.all (index 0)
+    at async Injector.resolveConstructorParams (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:144:27)
+    at async Injector.loadInstance (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:70:13)
+    at async Injector.loadProvider (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:98:9)
+    at async /workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:56:13
+    at async Promise.all (index 3)
+    at async InstanceLoader.createInstancesOfProviders (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:55:9)

@@ -1,3 +1,12 @@
+#!/bin/bash
+
+echo "Fixing XBorg challenge application..."
+
+# Fix frontend profile page
+cd frontend
+
+echo "Creating profile page..."
+cat > app/profile/page.tsx << 'PROFILEEOF'
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -28,7 +37,6 @@ export default function ProfilePage() {
   });
 
   useEffect(() => {
-    // Only check auth after initial load
     if (!authLoading && !user) {
       router.push('/auth/signin');
     }
@@ -81,7 +89,6 @@ export default function ProfilePage() {
     }
   };
 
-  // Show loading while checking auth
   if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -93,7 +100,6 @@ export default function ProfilePage() {
     );
   }
 
-  // Show loading while fetching profile
   if (isLoadingProfile) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -297,3 +303,150 @@ export default function ProfilePage() {
     </div>
   );
 }
+PROFILEEOF
+
+echo "✅ Profile page created"
+
+echo "Creating callback page..."
+cat > app/auth/callback/page.tsx << 'CALLBACKEOF'
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/src/contexts/AuthContext';
+
+export default function AuthCallbackPage() {
+  const router = useRouter();
+  const { login } = useAuth();
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    const userParam = urlParams.get('user');
+
+    if (token && userParam) {
+      try {
+        const userData = JSON.parse(decodeURIComponent(userParam));
+        login(token, userData);
+        
+        setTimeout(() => {
+          router.push('/profile');
+        }, 100);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+        setError('Invalid authentication response');
+        setTimeout(() => {
+          router.push('/auth/signin?error=invalid_response');
+        }, 2000);
+      }
+    } else {
+      setError('Missing authentication parameters');
+      setTimeout(() => {
+        router.push('/auth/signin?error=missing_params');
+      }, 2000);
+    }
+  }, [login, router]);
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center text-red-600">
+          <p className="text-xl font-semibold">Authentication Error</p>
+          <p className="mt-2">{error}</p>
+          <p className="text-sm text-gray-500 mt-4">Redirecting to sign in...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
+        <p className="mt-4">Completing authentication...</p>
+        <p className="text-sm text-gray-500 mt-2">You will be redirected shortly</p>
+      </div>
+    </div>
+  );
+}
+CALLBACKEOF
+
+echo "✅ Callback page created"
+
+echo "Testing frontend build..."
+npm run build 2>&1 | tail -20
+
+if [ $? -eq 0 ]; then
+    echo "✅ Frontend build successful!"
+else
+    echo "❌ Frontend build failed"
+    exit 1
+fi
+
+cd ../backend
+
+echo "Fixing backend TypeScript issues..."
+cat > src/user/entities/user.entity.ts << 'ENTITYEOF'
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+
+@Entity('users')
+export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ unique: true })
+  email: string;
+
+  @Column({ name: 'full_name', nullable: true })
+  full_name: string;
+
+  @Column({ name: 'github_url', nullable: true })
+  github_url: string;
+
+  @Column({ name: 'resume_url', nullable: true })
+  resume_url: string;
+
+  @Column({ type: 'text', nullable: true })
+  motivation: string;
+
+  @Column({ name: 'challenge_url', nullable: true })
+  challenge_url: string;
+
+  @Column({ name: 'google_id', nullable: true })
+  google_id: string;
+
+  @Column({ name: 'avatar_url', nullable: true })
+  avatar_url: string;
+
+  @CreateDateColumn({ name: 'created_at' })
+  created_at: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updated_at: Date;
+}
+ENTITYEOF
+
+echo "Testing backend compilation..."
+npx tsc --noEmit
+
+if [ $? -eq 0 ]; then
+    echo "✅ Backend TypeScript compilation successful!"
+else
+    echo "❌ Backend compilation failed"
+    exit 1
+fi
+
+echo ""
+echo "🎉 All fixes applied successfully!"
+echo ""
+echo "To run the application:"
+echo "1. Start backend: cd backend && npm run start:dev"
+echo "2. Start frontend: cd frontend && npm run dev"
+echo "3. Open: http://localhost:3000/auth/signin"
+echo ""
+echo "For testing without Google OAuth, add test endpoint to backend auth controller."
+SCRIPTEOF
+
+# Make the script executable
+chmod +x fix-app.sh

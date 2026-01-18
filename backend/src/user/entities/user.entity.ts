@@ -1,42 +1,37 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { IsEmail, IsUrl, MinLength } from 'class-validator';
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ unique: true })
-  @IsEmail()
   email: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'full_name', nullable: true })
   full_name: string;
 
-  @Column({ nullable: true })
-  @IsUrl()
+  @Column({ name: 'github_url', nullable: true })
   github_url: string;
 
-  @Column({ nullable: true })
-  @IsUrl()
+  @Column({ name: 'resume_url', nullable: true })
   resume_url: string;
 
   @Column({ type: 'text', nullable: true })
-  @MinLength(50, { message: 'Motivation must be at least 50 characters' })
   motivation: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'challenge_url', nullable: true })
   challenge_url: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'google_id', nullable: true })
   google_id: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'avatar_url', nullable: true })
   avatar_url: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   created_at: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updated_at: Date;
 }

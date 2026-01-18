@@ -8,47 +8,54 @@ import { UpdateProfileDto } from './dto/update-profile.dto';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    private userRepository: Repository<User>,
   ) {}
 
-  async findOne(id: number): Promise<User> {
-    const user = await this.usersRepository.findOne({ where: { id } });
+  async findOrCreate(googleProfile: {
+    googleId: string;
+    email: string;
+    name: string;
+    picture?: string;
+  }): Promise<User> {
+    let user = await this.userRepository.findOne({
+      where: { google_id: googleProfile.googleId },
+    });
+
+    if (!user) {
+      user = this.userRepository.create({
+        google_id: googleProfile.googleId,
+        email: googleProfile.email,
+        full_name: googleProfile.name,
+        avatar_url: googleProfile.picture,
+      });
+      await this.userRepository.save(user);
+    }
+
+    return user;
+  }
+
+  async findById(id: number): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException('User not found');
     }
     return user;
   }
 
-  async getProfile(userId: number): Promise<User> {
-    return this.findOne(userId);
-  }
+  async update(id: number, updateProfileDto: UpdateProfileDto): Promise<User> {
+    const user = await this.findById(id);
+    
+    // Update only provided fields
+    Object.keys(updateProfileDto).forEach(key => {
+      if (updateProfileDto[key] !== undefined) {
+        user[key] = updateProfileDto[key];
+      }
+    });
 
-  async updateProfile(userId: number, updateProfileDto: UpdateProfileDto): Promise<User> {
-    await this.usersRepository.update(userId, updateProfileDto);
-    return this.findOne(userId);
+    return this.userRepository.save(user);
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return await this.usersRepository.findOne({ where: { email } });
-  }
-
-  async findOrCreate(profile: any): Promise<User> {
-    let user = await this.findByEmail(profile.email);
-    
-    if (!user) {
-      user = this.usersRepository.create({
-        email: profile.email,
-        full_name: profile.displayName,
-        google_id: profile.id,
-        avatar_url: profile.photos?.[0]?.value,
-      });
-      await this.usersRepository.save(user);
-    } else if (!user.google_id) {
-      user.google_id = profile.id;
-      user.avatar_url = profile.photos?.[0]?.value;
-      await this.usersRepository.save(user);
-    }
-    
-    return user;
+    return this.userRepository.findOne({ where: { email } });
   }
 }

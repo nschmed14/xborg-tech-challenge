@@ -5,19 +5,25 @@ import { UserService } from '../user/user.service';
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UserService,  // This should be UserService
-    private jwtService: JwtService,
+    private readonly userService: UserService,
+    private readonly jwtService: JwtService,
   ) {}
 
-  async validateGoogleUser(profile: any) {
-    const user = await this.userService.findOrCreate(profile);
+  async validateGoogleUser(googleProfile: {
+    googleId: string;
+    email: string;
+    name: string;
+    picture?: string;
+  }) {
+    const user = await this.userService.findOrCreate(googleProfile);
     
+    // Generate JWT token
     const payload = {
-      sub: user.id.toString(),
+      sub: user.id,
       email: user.email,
-      name: user.full_name,
+      google_id: user.google_id,
     };
-    
+
     return {
       access_token: this.jwtService.sign(payload),
       user: {
@@ -27,5 +33,13 @@ export class AuthService {
         avatar_url: user.avatar_url,
       },
     };
+  }
+
+  validateToken(token: string) {
+    try {
+      return this.jwtService.verify(token);
+    } catch (error) {
+      return null;
+    }
   }
 }

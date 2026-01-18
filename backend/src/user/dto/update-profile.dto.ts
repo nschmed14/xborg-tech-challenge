@@ -1,27 +1,28 @@
-import { IsOptional, IsString, IsUrl, MinLength } from 'class-validator';
+import { IsString, IsEmail, IsOptional, MinLength, IsUrl } from 'class-validator';
 
 export class UpdateProfileDto {
-  @IsOptional()
   @IsString()
+  @IsOptional()
   full_name?: string;
 
+  @IsEmail()
   @IsOptional()
-  @IsString()
+  email?: string;
+
   @IsUrl()
+  @IsOptional()
   github_url?: string;
 
-  @IsOptional()
-  @IsString()
   @IsUrl()
+  @IsOptional()
   resume_url?: string;
 
-  @IsOptional()
   @IsString()
-  @MinLength(50)
+  @MinLength(50, { message: 'Motivation must be at least 50 characters long' })
+  @IsOptional()
   motivation?: string;
 
-  @IsOptional()
-  @IsString()
   @IsUrl()
+  @IsOptional()
   challenge_url?: string;
 }

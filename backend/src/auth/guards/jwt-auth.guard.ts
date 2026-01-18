@@ -1,24 +1,19 @@
-﻿import { Injectable, ExecutionContext } from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
-import { Observable } from "rxjs";
+﻿import { Injectable, ExecutionContext, UnauthorizedException } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { Observable } from 'rxjs';
 
 @Injectable()
-export class JwtAuthGuard extends AuthGuard("jwt") {
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
-    const request = context.switchToHttp().getRequest();
-    
-    const publicRoutes = [
-      "/auth/login/google",
-      "/auth/validate/google",
-      "/health",
-    ];
-    
-    if (publicRoutes.some(route => request.url.startsWith(route))) {
-      return true;
-    }
-    
+export class JwtAuthGuard extends AuthGuard('jwt') {
+  canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
+    // Add your custom authentication logic here
     return super.canActivate(context);
+  }
+
+  handleRequest(err, user, info) {
+    // You can throw an exception based on either "info" or "err" arguments
+    if (err || !user) {
+      throw err || new UnauthorizedException('Invalid or expired token');
+    }
+    return user;
   }
 }

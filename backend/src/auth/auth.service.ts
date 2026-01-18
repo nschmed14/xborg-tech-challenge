@@ -5,7 +5,7 @@ import { UserService } from '../user/user.service';
 @Injectable()
 export class AuthService {
   constructor(
-    private userService: UserService,
+    private userService: UserService,  // This should be UserService
     private jwtService: JwtService,
   ) {}
 
@@ -13,7 +13,7 @@ export class AuthService {
     const user = await this.userService.findOrCreate(profile);
     
     const payload = {
-      sub: user.id,
+      sub: user.id.toString(),
       email: user.email,
       name: user.full_name,
     };

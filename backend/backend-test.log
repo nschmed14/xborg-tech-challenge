@@ -53,3 +53,163 @@ Potential solutions:
     at async /workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:56:13
     at async Promise.all (index 3)
     at async InstanceLoader.createInstancesOfProviders (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+[2J[3J[H[[90m1:15:34 AM[0m] File change detected. Starting incremental compilation...
+
+[[90m1:15:34 AM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 143179  - [39m01/18/2026, 1:15:36 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 143179  - [39m01/18/2026, 1:15:36 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +24ms[39m
+[32m[Nest] 143179  - [39m01/18/2026, 1:15:36 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDatabaseModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 143179  - [39m01/18/2026, 1:15:36 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 143179  - [39m01/18/2026, 1:15:36 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 143179  - [39m01/18/2026, 1:15:36 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[31m[Nest] 143179  - [39m01/18/2026, 1:15:36 AM [31m  ERROR[39m [38;5;3m[ExceptionHandler] [39m[31mNest can't resolve dependencies of the AuthService (?, JwtService). Please make sure that the argument UserService at index [0] is available in the AuthModule context.
+
+Potential solutions:
+- Is AuthModule a valid NestJS module?
+- If UserService is a provider, is it part of the current AuthModule?
+- If UserService is exported from a separate @Module, is that module imported within AuthModule?
+  @Module({
+    imports: [ /* the Module containing UserService */ ]
+  })
+[39m
+Error: Nest can't resolve dependencies of the AuthService (?, JwtService). Please make sure that the argument UserService at index [0] is available in the AuthModule context.
+
+Potential solutions:
+- Is AuthModule a valid NestJS module?
+- If UserService is a provider, is it part of the current AuthModule?
+- If UserService is exported from a separate @Module, is that module imported within AuthModule?
+  @Module({
+    imports: [ /* the Module containing UserService */ ]
+  })
+
+    at Injector.lookupComponentInParentModules (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:262:19)
+    at async Injector.resolveComponentInstance (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:215:33)
+    at async resolveParam (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:129:38)
+    at async Promise.all (index 0)
+    at async Injector.resolveConstructorParams (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:144:27)
+    at async Injector.loadInstance (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:70:13)
+    at async Injector.loadProvider (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:98:9)
+    at async /workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:56:13
+    at async Promise.all (index 3)
+    at async InstanceLoader.createInstancesOfProviders (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+[2J[3J[H[[90m1:16:18 AM[0m] File change detected. Starting incremental compilation...
+
+[[90m1:16:18 AM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 143657  - [39m01/18/2026, 1:16:19 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 143657  - [39m01/18/2026, 1:16:19 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +44ms[39m
+[32m[Nest] 143657  - [39m01/18/2026, 1:16:19 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDatabaseModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 143657  - [39m01/18/2026, 1:16:19 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 143657  - [39m01/18/2026, 1:16:19 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 143657  - [39m01/18/2026, 1:16:19 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1ms[39m
+[31m[Nest] 143657  - [39m01/18/2026, 1:16:19 AM [31m  ERROR[39m [38;5;3m[ExceptionHandler] [39m[31mNest can't resolve dependencies of the AuthService (?, JwtService). Please make sure that the argument UserService at index [0] is available in the AuthModule context.
+
+Potential solutions:
+- Is AuthModule a valid NestJS module?
+- If UserService is a provider, is it part of the current AuthModule?
+- If UserService is exported from a separate @Module, is that module imported within AuthModule?
+  @Module({
+    imports: [ /* the Module containing UserService */ ]
+  })
+[39m
+Error: Nest can't resolve dependencies of the AuthService (?, JwtService). Please make sure that the argument UserService at index [0] is available in the AuthModule context.
+
+Potential solutions:
+- Is AuthModule a valid NestJS module?
+- If UserService is a provider, is it part of the current AuthModule?
+- If UserService is exported from a separate @Module, is that module imported within AuthModule?
+  @Module({
+    imports: [ /* the Module containing UserService */ ]
+  })
+
+    at Injector.lookupComponentInParentModules (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:262:19)
+    at async Injector.resolveComponentInstance (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:215:33)
+    at async resolveParam (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:129:38)
+    at async Promise.all (index 0)
+    at async Injector.resolveConstructorParams (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:144:27)
+    at async Injector.loadInstance (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:70:13)
+    at async Injector.loadProvider (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:98:9)
+    at async /workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:56:13
+    at async Promise.all (index 3)
+    at async InstanceLoader.createInstancesOfProviders (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+[2J[3J[H[[90m1:16:46 AM[0m] File change detected. Starting incremental compilation...
+
+[[90m1:16:46 AM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 143895  - [39m01/18/2026, 1:16:48 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 143895  - [39m01/18/2026, 1:16:48 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +36ms[39m
+[32m[Nest] 143895  - [39m01/18/2026, 1:16:48 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDatabaseModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 143895  - [39m01/18/2026, 1:16:48 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 143895  - [39m01/18/2026, 1:16:48 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 143895  - [39m01/18/2026, 1:16:48 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[31m[Nest] 143895  - [39m01/18/2026, 1:16:48 AM [31m  ERROR[39m [38;5;3m[ExceptionHandler] [39m[31mNest can't resolve dependencies of the AuthService (?, JwtService). Please make sure that the argument UserService at index [0] is available in the AuthModule context.
+
+Potential solutions:
+- Is AuthModule a valid NestJS module?
+- If UserService is a provider, is it part of the current AuthModule?
+- If UserService is exported from a separate @Module, is that module imported within AuthModule?
+  @Module({
+    imports: [ /* the Module containing UserService */ ]
+  })
+[39m
+Error: Nest can't resolve dependencies of the AuthService (?, JwtService). Please make sure that the argument UserService at index [0] is available in the AuthModule context.
+
+Potential solutions:
+- Is AuthModule a valid NestJS module?
+- If UserService is a provider, is it part of the current AuthModule?
+- If UserService is exported from a separate @Module, is that module imported within AuthModule?
+  @Module({
+    imports: [ /* the Module containing UserService */ ]
+  })
+
+    at Injector.lookupComponentInParentModules (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:262:19)
+    at async Injector.resolveComponentInstance (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:215:33)
+    at async resolveParam (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:129:38)
+    at async Promise.all (index 0)
+    at async Injector.resolveConstructorParams (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:144:27)
+    at async Injector.loadInstance (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:70:13)
+    at async Injector.loadProvider (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:98:9)
+    at async /workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:56:13
+    at async Promise.all (index 3)
+    at async InstanceLoader.createInstancesOfProviders (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:55:9)
+[2J[3J[H[[90m1:17:05 AM[0m] File change detected. Starting incremental compilation...
+
+[[90m1:17:05 AM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 144034  - [39m01/18/2026, 1:17:06 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 144034  - [39m01/18/2026, 1:17:06 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +59ms[39m
+[32m[Nest] 144034  - [39m01/18/2026, 1:17:06 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDatabaseModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 144034  - [39m01/18/2026, 1:17:06 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 144034  - [39m01/18/2026, 1:17:06 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 144034  - [39m01/18/2026, 1:17:06 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +1ms[39m
+[31m[Nest] 144034  - [39m01/18/2026, 1:17:06 AM [31m  ERROR[39m [38;5;3m[ExceptionHandler] [39m[31mNest can't resolve dependencies of the AuthService (?, JwtService). Please make sure that the argument UserService at index [0] is available in the AuthModule context.
+
+Potential solutions:
+- Is AuthModule a valid NestJS module?
+- If UserService is a provider, is it part of the current AuthModule?
+- If UserService is exported from a separate @Module, is that module imported within AuthModule?
+  @Module({
+    imports: [ /* the Module containing UserService */ ]
+  })
+[39m
+Error: Nest can't resolve dependencies of the AuthService (?, JwtService). Please make sure that the argument UserService at index [0] is available in the AuthModule context.
+
+Potential solutions:
+- Is AuthModule a valid NestJS module?
+- If UserService is a provider, is it part of the current AuthModule?
+- If UserService is exported from a separate @Module, is that module imported within AuthModule?
+  @Module({
+    imports: [ /* the Module containing UserService */ ]
+  })
+
+    at Injector.lookupComponentInParentModules (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:262:19)
+    at async Injector.resolveComponentInstance (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:215:33)
+    at async resolveParam (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:129:38)
+    at async Promise.all (index 0)
+    at async Injector.resolveConstructorParams (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:144:27)
+    at async Injector.loadInstance (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:70:13)
+    at async Injector.loadProvider (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/injector.js:98:9)
+    at async /workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:56:13
+    at async Promise.all (index 3)
+    at async InstanceLoader.createInstancesOfProviders (/workspaces/xborg-tech-challenge/backend/node_modules/@nestjs/core/injector/instance-loader.js:55:9)

@@ -1,9 +1,10 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://turbo-zebra-946g554gq693pq46-3001.app.github.dev';
+// For GitHub Codespaces - always use localhost:3001
+const API_BASE_URL = 'http://localhost:3001';
 
-console.log('🔧 API Base URL:', API_BASE_URL);
+console.log('🔧 API Base URL for Codespaces:', API_BASE_URL);
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -11,8 +12,8 @@ const api = axios.create({
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
-  timeout: 15000,
-  withCredentials: true, // Important for cookies and CORS
+  timeout: 30000, // Increased timeout for Codespaces
+  withCredentials: false, // Disable for Codespaces CORS simplicity
 });
 
 // Add request logging
@@ -20,21 +21,18 @@ api.interceptors.request.use(
   (config) => {
     console.log(`🚀 ${config.method?.toUpperCase()} ${config.url}`, {
       baseURL: config.baseURL,
-      headers: config.headers,
     });
     
     const token = Cookies.get('access_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
-      console.log('🔑 Adding Authorization header with token');
-    } else {
-      console.log('⚠️ No access token found in cookies');
+      console.log('🔑 Adding Authorization header');
     }
     
     return config;
   },
   (error) => {
-    console.error('❌ Request error:', error);
+    console.error('❌ Request error:', error.message);
     return Promise.reject(error);
   }
 );
@@ -42,29 +40,20 @@ api.interceptors.request.use(
 // Add response logging
 api.interceptors.response.use(
   (response) => {
-    console.log(`✅ ${response.status} ${response.config.url}`, {
-      data: response.data,
-    });
+    console.log(`✅ ${response.status} ${response.config.url}`);
     return response;
   },
   (error) => {
     console.error('❌ API Error:', {
       message: error.message,
-      code: error.code,
       url: error.config?.url,
-      method: error.config?.method,
-      baseURL: error.config?.baseURL,
       status: error.response?.status,
-      statusText: error.response?.statusText,
-      data: error.response?.data,
-      headers: error.response?.headers,
     });
 
-    // Handle network errors
     if (error.code === 'ECONNABORTED') {
       console.error('⏰ Request timeout');
     } else if (!error.response) {
-      console.error('🌐 Network error - backend may be down or CORS issue');
+      console.error('🌐 Network error - check if backend is running on port 3001');
     }
 
     if (error.response?.status === 401) {

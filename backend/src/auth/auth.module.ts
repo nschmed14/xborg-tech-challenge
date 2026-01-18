@@ -1,25 +1,27 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthController } from './auth.controller';
-import { TestAuthController } from './test-auth.controller';
-import { SimpleTestController } from './simple-test.controller';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthService } from './auth.service';
+import { AuthController } from './auth.controller';
 import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { User } from '../user/entities/user.entity';
+import { UserModule } from '../user/user.module';
 
 @Module({
   imports: [
+    UserModule,
     PassportModule,
-    TypeOrmModule.forFeature([User]),
-    JwtModule.register({
-      secret: process.env.JWT_SECRET || 'your-secret-key-change-this',
-      signOptions: { expiresIn: '7d' },
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '7d' },
+      }),
+      inject: [ConfigService],
     }),
   ],
-  controllers: [AuthController, TestAuthController],
+  controllers: [AuthController],
   providers: [AuthService, GoogleStrategy, JwtStrategy],
   exports: [AuthService],
 })

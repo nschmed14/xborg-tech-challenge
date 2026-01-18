@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '@/src/contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import api from '@/src/lib/api';
+import api from '@/lib/api';
 
 interface ProfileData {
   full_name: string;
@@ -28,7 +28,6 @@ export default function ProfilePage() {
   });
 
   useEffect(() => {
-    // Only check auth after initial load
     if (!authLoading && !user) {
       router.push('/auth/signin');
     }
@@ -81,7 +80,6 @@ export default function ProfilePage() {
     }
   };
 
-  // Show loading while checking auth
   if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -93,7 +91,6 @@ export default function ProfilePage() {
     );
   }
 
-  // Show loading while fetching profile
   if (isLoadingProfile) {
     return (
       <div className="min-h-screen flex items-center justify-center">

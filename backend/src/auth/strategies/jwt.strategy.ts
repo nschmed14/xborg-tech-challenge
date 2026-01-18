@@ -14,10 +14,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    // Convert string ID to number for consistency
+    // Convert payload.sub to number for consistency
     const userId = parseInt(payload.sub, 10);
     return {
-      id: isNaN(userId) ? payload.sub : userId,
+      id: isNaN(userId) ? 0 : userId,
       email: payload.email,
     };
   }

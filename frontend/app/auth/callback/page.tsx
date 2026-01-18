@@ -1,32 +1,48 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function AuthCallbackPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const { login } = useAuth();
+  const [hasProcessed, setHasProcessed] = useState(false);
 
   useEffect(() => {
-    // Get token from URL query parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-    
-    if (token) {
-      // Store token in localStorage for future requests
-      localStorage.setItem('auth_token', token);
-      
-      // Redirect to profile page
-      router.push('/profile');
+    // Only process once
+    if (hasProcessed) return;
+
+    const token = searchParams.get('token');
+    const userParam = searchParams.get('user');
+
+    if (token && userParam) {
+      try {
+        const userData = JSON.parse(decodeURIComponent(userParam));
+        login(token, userData);
+        setHasProcessed(true);
+        
+        // Redirect after a short delay
+        setTimeout(() => {
+          router.push('/profile');
+        }, 100);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+        router.push('/auth/signin?error=invalid_response');
+      }
     } else {
-      // No token found, redirect to home
-      router.push('/');
+      router.push('/auth/signin?error=missing_params');
     }
-  }, [router]);
+  }, [searchParams, login, router, hasProcessed]);
 
   return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h2>Authenticating...</h2>
-      <p>Please wait while we complete your authentication.</p>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
+        <p className="mt-4">Completing authentication...</p>
+        <p className="text-sm text-gray-500 mt-2">You will be redirected shortly</p>
+      </div>
     </div>
   );
 }

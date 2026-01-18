@@ -2,49 +2,54 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '../entities/user.entity';
+import { User } from '../user/entities/user.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    private userRepository: Repository<User>,
     private jwtService: JwtService,
   ) {}
 
-  async validateOAuthLogin(profile: any): Promise<any> {
-    // Handle different profile structures
-    const email = profile.email || profile.emails?.[0]?.value;
-    const displayName = profile.displayName || 
-                       (profile.firstName && profile.lastName ? 
-                        `${profile.firstName} ${profile.lastName}` : 
-                        'User');
-    const googleId = profile.id || profile.googleId;
+  async validateGoogleUser(googleUser: any): Promise<any> {
+    const { googleId, email, full_name, avatar_url } = googleUser;
 
-    if (!email) {
-      throw new Error('Email is required for OAuth login');
-    }
-
-    let user = await this.usersRepository.findOne({
-      where: { email },
+    let user = await this.userRepository.findOne({
+      where: [{ google_id: googleId }, { email }],
     });
 
     if (!user) {
-      user = this.usersRepository.create({
+      user = this.userRepository.create({
+        google_id: googleId,
         email,
-        fullName: displayName,
-        googleId,
+        full_name,
+        avatar_url,
       });
-      await this.usersRepository.save(user);
+    } else {
+      user.google_id = googleId;
+      user.avatar_url = avatar_url;
+      if (!user.full_name && full_name) {
+        user.full_name = full_name;
+      }
     }
 
-    return user;
-  }
+    await this.userRepository.save(user);
 
-  async login(user: any) {
-    const payload = { email: user.email, sub: user.id };
+    const payload = { sub: user.id, email: user.email };
     return {
       access_token: this.jwtService.sign(payload),
+      user: {
+        id: user.id,
+        email: user.email,
+        full_name: user.full_name,
+        avatar_url: user.avatar_url,
+      },
     };
+  }
+
+  generateJwtToken(user: User): string {
+    const payload = { sub: user.id, email: user.email };
+    return this.jwtService.sign(payload);
   }
 }

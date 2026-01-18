@@ -1,29 +1,30 @@
-import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Req, UseGuards, Res } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import type { Request, Response } from 'express';
 import { AuthService } from './auth.service';
+import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
   @Get('login/google')
   @UseGuards(AuthGuard('google'))
-  googleLogin() {
+  async googleLogin() {
     // Initiates Google OAuth flow
   }
 
   @Get('validate/google')
   @UseGuards(AuthGuard('google'))
-  async googleValidate(@Req() req: Request, @Res() res: Response) {
-    // The user is already validated by the GoogleStrategy
-    // Just need to create/update in database and issue JWT
-    const user = await this.authService.validateOAuthLogin(req.user);
-    const token = await this.authService.login(user);
-    
-    // Redirect to frontend with token
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-    const redirectUrl = frontendUrl + '/auth/callback?token=' + token.access_token;
-    res.redirect(redirectUrl);
+  async googleAuthCallback(@Req() req: any, @Res() res: Response) {
+    try {
+      const result = await this.authService.validateGoogleUser(req.user);
+      
+      // Redirect to frontend with token
+      res.redirect(
+        `http://localhost:3000/auth/callback?token=${result.access_token}&user=${encodeURIComponent(JSON.stringify(result.user))}`,
+      );
+    } catch (error) {
+      res.redirect(`http://localhost:3000/auth/error?message=${encodeURIComponent(error.message)}`);
+    }
   }
 }

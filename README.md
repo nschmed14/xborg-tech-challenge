@@ -133,14 +133,41 @@ cd frontend
 npm test
 ```
 
-## Submission
-Create a private GitHub repository with the project and include:
+## Deployment
 
-- This repository contents
-- `backend/.env.example` and `frontend/.env.example`
-- A short deployment/testing note in the README describing how to run the app locally and any caveats (ports, OAuth setup)
+### Backend Deployment (Railway)
 
-Optional: include a short write-up of design decisions and security notes.
+1. Go to [Railway.app](https://railway.app) and create an account
+2. Click "New Project" → "Deploy from GitHub repo"
+3. Select this repository
+4. Set environment variables in Railway:
+   - `GOOGLE_CLIENT_ID` (optional for testing)
+   - `GOOGLE_CLIENT_SECRET` (optional for testing)
+   - `JWT_SECRET`: `your-super-secret-jwt-key-change-in-production`
+   - `DATABASE_PATH`: `./database.sqlite`
+   - `PORT`: `3001`
+   - `FRONTEND_URL`: `https://your-frontend-url.vercel.app`
+   - `NODE_ENV`: `production`
+5. Railway will auto-deploy using the Dockerfile
+
+### Frontend Deployment (Vercel)
+
+1. Go to [Vercel.com](https://vercel.com) and create an account
+2. Click "New Project" → "Import Git Repository"
+3. Select this repository and configure:
+   - **Root Directory**: `frontend`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `.next`
+4. Add environment variable:
+   - `NEXT_PUBLIC_API_URL`: `https://your-railway-backend-url.up.railway.app`
+5. Deploy
+
+### Testing Production
+
+Once both are deployed:
+1. Visit your Vercel frontend URL
+2. Click "Sign in with Test Account"
+3. Should work with the deployed backend
 
 ## License
 MIT

@@ -6,9 +6,16 @@ import { AuthService } from '../auth.service';
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(private authService: AuthService) {
+    const clientID = process.env.GOOGLE_CLIENT_ID;
+    const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+    if (!clientID || !clientSecret) {
+      throw new Error('Google OAuth credentials not configured. Use test auth instead.');
+    }
+
     super({
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientID,
+      clientSecret,
       callbackURL:
         process.env.GOOGLE_CALLBACK_URL ||
         'http://localhost:3001/auth/validate/google',

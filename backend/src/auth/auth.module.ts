@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, DynamicModule, Provider } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -10,21 +10,34 @@ import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { UserModule } from '../user/user.module';
 
-@Module({
-  imports: [
-    UserModule,
-    PassportModule,
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET'),
-        signOptions: { expiresIn: '7d' },
-      }),
-      inject: [ConfigService],
-    }),
-  ],
-  controllers: [AuthController, TestAuthController, SimpleTestController],
-  providers: [AuthService, GoogleStrategy, JwtStrategy],
-  exports: [AuthService],
-})
-export class AuthModule {}
+@Module({})
+export class AuthModule {
+  static register(): DynamicModule {
+    const providers: Provider[] = [AuthService, JwtStrategy];
+    const controllers = [AuthController, TestAuthController, SimpleTestController];
+
+    // Conditionally add GoogleStrategy if GOOGLE_CLIENT_ID is set
+    if (process.env.GOOGLE_CLIENT_ID) {
+      providers.push(GoogleStrategy);
+    }
+
+    return {
+      module: AuthModule,
+      imports: [
+        UserModule,
+        PassportModule,
+        JwtModule.registerAsync({
+          imports: [ConfigModule],
+          useFactory: async (configService: ConfigService) => ({
+            secret: configService.get<string>('JWT_SECRET'),
+            signOptions: { expiresIn: '7d' },
+          }),
+          inject: [ConfigService],
+        }),
+      ],
+      controllers,
+      providers,
+      exports: [AuthService],
+    };
+  }
+}

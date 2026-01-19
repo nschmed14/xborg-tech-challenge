@@ -6,10 +6,17 @@ import { useAuth } from '@/contexts/AuthContext';
 
 export default function AuthCallbackPage() {
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const [error, setError] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+
     // Get token and user from URL query params
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
@@ -18,12 +25,8 @@ export default function AuthCallbackPage() {
     if (token && userParam) {
       try {
         const userData = JSON.parse(decodeURIComponent(userParam));
+        console.log('Callback page: calling login with token and userData', userData);
         login(token, userData);
-        
-        // Redirect to profile
-        setTimeout(() => {
-          router.push('/profile');
-        }, 100);
       } catch (error) {
         console.error('Error parsing user data:', error);
         setError('Invalid authentication response');
@@ -32,12 +35,32 @@ export default function AuthCallbackPage() {
         }, 2000);
       }
     } else {
+      console.log('Callback page: missing token or userParam', { token: !!token, userParam: !!userParam });
       setError('Missing authentication parameters');
       setTimeout(() => {
         router.push('/auth/signin?error=missing_params');
       }, 2000);
     }
-  }, [login, router]);
+  }, [isClient, login, router]);
+
+  // Separate effect to handle redirect after user is set
+  useEffect(() => {
+    if (user) {
+      console.log('Callback page: user set, redirecting to /profile');
+      router.push('/profile');
+    }
+  }, [user, router]);
+
+  if (!isClient) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
+          <p className="mt-4">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (error) {
     return (

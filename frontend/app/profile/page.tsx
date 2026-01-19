@@ -169,19 +169,19 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-gray-50 rounded-lg shadow p-6">
           <h3 className="text-lg font-medium text-gray-900 mb-4">Profile Information</h3>
           
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Full Name</label>
+              <label className="block text-sm font-medium text-gray-900">Full Name</label>
               {isEditing ? (
                 <input
                   type="text"
                   name="full_name"
                   value={profile.full_name}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 placeholder-gray-600"
                   placeholder="Your full name"
                 />
               ) : (
@@ -190,14 +190,14 @@ export default function ProfilePage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">GitHub URL</label>
+              <label className="block text-sm font-medium text-gray-900">GitHub URL</label>
               {isEditing ? (
                 <input
                   type="url"
                   name="github_url"
                   value={profile.github_url}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 placeholder-gray-600"
                   placeholder="https://github.com/username"
                 />
               ) : (
@@ -212,14 +212,14 @@ export default function ProfilePage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Resume/Portfolio URL</label>
+              <label className="block text-sm font-medium text-gray-900">Resume/Portfolio URL</label>
               {isEditing ? (
                 <input
                   type="url"
                   name="resume_url"
                   value={profile.resume_url}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 placeholder-gray-600"
                   placeholder="https://yourportfolio.dev"
                 />
               ) : (
@@ -234,10 +234,10 @@ export default function ProfilePage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-900">
                 Motivation (Min. 50 characters)
                 {isEditing && (
-                  <span className="text-xs text-gray-500 ml-2">
+                  <span className="text-xs text-gray-600 ml-2">
                     {profile.motivation.length}/50 characters
                   </span>
                 )}
@@ -248,7 +248,7 @@ export default function ProfilePage() {
                   value={profile.motivation}
                   onChange={handleInputChange}
                   rows={4}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 placeholder-gray-600"
                   placeholder="Why you want to work at XBorg and why you're a good fit..."
                   minLength={50}
                 />
@@ -260,14 +260,14 @@ export default function ProfilePage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Challenge URL</label>
+              <label className="block text-sm font-medium text-gray-900">Challenge URL</label>
               {isEditing ? (
                 <input
                   type="url"
                   name="challenge_url"
                   value={profile.challenge_url}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 placeholder-gray-600"
                   placeholder="https://github.com/username/xborg-challenge"
                 />
               ) : (

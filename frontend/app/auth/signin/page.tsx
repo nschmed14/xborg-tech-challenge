@@ -14,12 +14,16 @@ export default function SignInPage() {
     }
   }, [user, isLoading, router]);
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:3001/auth/login/google';
+    console.log('Google login clicked, redirecting to', `${API_URL}/auth/login/google`);
+    window.location.assign(`${API_URL}/auth/login/google`);
   };
 
   const handleTestLogin = () => {
-    window.location.href = 'http://localhost:3001/auth/test/login';
+    console.log('Test login clicked, redirecting to local API route');
+    window.location.assign('/api/auth/test-login');
   };
 
   if (isLoading) {

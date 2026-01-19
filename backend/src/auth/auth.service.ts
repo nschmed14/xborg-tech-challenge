@@ -16,7 +16,7 @@ export class AuthService {
     picture?: string;
   }) {
     const user = await this.userService.findOrCreate(googleProfile);
-    
+
     // Generate JWT token
     const payload = {
       sub: user.id,
@@ -24,13 +24,19 @@ export class AuthService {
       google_id: user.google_id,
     };
 
+    const access_token = this.jwtService.sign(payload);
+
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token,
       user: {
         id: user.id,
         email: user.email,
         full_name: user.full_name,
         avatar_url: user.avatar_url,
+        github_url: user.github_url,
+        resume_url: user.resume_url,
+        motivation: user.motivation,
+        challenge_url: user.challenge_url,
       },
     };
   }

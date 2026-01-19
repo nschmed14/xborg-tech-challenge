@@ -44,9 +44,9 @@ export class UserService {
 
   async update(id: number, updateProfileDto: UpdateProfileDto): Promise<User> {
     const user = await this.findById(id);
-    
+
     // Update only provided fields
-    Object.keys(updateProfileDto).forEach(key => {
+    Object.keys(updateProfileDto).forEach((key) => {
       if (updateProfileDto[key] !== undefined) {
         user[key] = updateProfileDto[key];
       }

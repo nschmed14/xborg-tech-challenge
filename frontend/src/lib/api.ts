@@ -1,10 +1,10 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-// For GitHub Codespaces - always use localhost:3001
-const API_BASE_URL = 'http://localhost:3001';
+// Use Next.js API routes for proxying to local backend
+const API_BASE_URL = '';
 
-console.log('🔧 API Base URL for Codespaces:', API_BASE_URL);
+console.log('🔧 API Base URL for Codespaces:', 'Using Next.js API routes');
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -23,7 +23,7 @@ api.interceptors.request.use(
       baseURL: config.baseURL,
     });
     
-    const token = Cookies.get('access_token');
+    const token = Cookies.get('auth_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
       console.log('🔑 Adding Authorization header');
@@ -57,7 +57,7 @@ api.interceptors.response.use(
     }
 
     if (error.response?.status === 401) {
-      Cookies.remove('access_token');
+      Cookies.remove('auth_token');
       Cookies.remove('user');
       if (typeof window !== 'undefined') {
         window.location.href = '/auth/signin';

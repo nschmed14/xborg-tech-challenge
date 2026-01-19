@@ -18,13 +18,15 @@ export class AuthController {
   async googleAuthCallback(@Req() req: any, @Res() res: Response) {
     try {
       const result = await this.authService.validateGoogleUser(req.user);
-      
+
       // Redirect to frontend with token
       res.redirect(
-        `http://localhost:3000/auth/callback?token=${result.access_token}&user=${encodeURIComponent(JSON.stringify(result.user))}`,
+        `${process.env.FRONTEND_URL}/auth/callback?token=${result.access_token}&user=${encodeURIComponent(JSON.stringify(result.user))}`,
       );
     } catch (error) {
-      res.redirect(`http://localhost:3000/auth/error?message=${encodeURIComponent(error.message)}`);
+      res.redirect(
+        `${process.env.FRONTEND_URL}/auth/error?message=${encodeURIComponent(error.message)}`,
+      );
     }
   }
 
@@ -32,18 +34,22 @@ export class AuthController {
   async testLogin(@Res() res: Response) {
     // For testing without Google OAuth in Codespaces
     const testUser = {
+      googleId: 'test_12345',
       email: 'test@example.com',
-      id: '12345',
-      displayName: 'Test User - Codespaces',
-      photos: [{ value: '' }]
+      name: 'Test User - Codespaces',
+      picture: '',
     };
-    
+
     try {
       const result = await this.authService.validateGoogleUser(testUser);
-      res.redirect(`http://localhost:3000/auth/callback?token=${result.access_token}&user=${encodeURIComponent(JSON.stringify(result.user))}`);
+      res.redirect(
+        `${process.env.FRONTEND_URL}/auth/callback?token=${result.access_token}&user=${encodeURIComponent(JSON.stringify(result.user))}`,
+      );
     } catch (error) {
       console.error('Test login error:', error);
-      res.status(500).json({ error: 'Test login failed', details: error.message });
+      res
+        .status(500)
+        .json({ error: 'Test login failed', details: error.message });
     }
   }
 }

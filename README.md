@@ -20,40 +20,60 @@ A full-stack application with Google OAuth authentication, user profile manageme
 
 ### Prerequisites
 - Node.js 20+
-- Google OAuth credentials
+- Google OAuth credentials (optional for test account)
 
 ### Backend Setup
-1. Navigate to backend directory:
-   \\\ash
+1. Navigate to the backend directory:
+
+   ```bash
    cd backend
-   \\\
+   ```
+
 2. Install dependencies:
-   \\\ash
+
+   ```bash
    npm install
-   \\\
-3. Copy environment file:
-   \\\ash
+   ```
+
+3. Copy the example environment file and edit values as needed:
+
+   ```bash
    cp .env.example .env
-   \\\
-4. Update \.env\ with your Google OAuth credentials
-5. Start development server:
-   \\\ash
+   # edit .env and set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, JWT_SECRET, etc.
+   ```
+
+4. Start the development server:
+
+   ```bash
    npm run start:dev
-   \\\
+   ```
 
 ### Frontend Setup
-1. Navigate to frontend directory:
-   \\\ash
+1. Navigate to the frontend directory:
+
+   ```bash
    cd frontend
-   \\\
+   ```
+
 2. Install dependencies:
-   \\\ash
+
+   ```bash
    npm install
-   \\\
-3. Start development server:
-   \\\ash
+   ```
+
+3. Copy the example environment file and edit if you need to override the API URL:
+
+   ```bash
+   cp .env.example .env
+   # If your backend runs on a non-default port set NEXT_PUBLIC_API_URL accordingly
+   ```
+
+4. Start the development server (default Next dev port is 3000; if that port is in use it will pick another port, e.g. 3002):
+
+   ```bash
    npm run dev
-   \\\
+   # or to force a specific port: PORT=3002 npm run dev
+   ```
 
 ## API Endpoints
 
@@ -87,22 +107,40 @@ xborg-tech-challenge/
 \\\
 
 ## Environment Variables
-See \.env.example\ for required variables:
-- \GOOGLE_CLIENT_ID\
-- \GOOGLE_CLIENT_SECRET\
-- \JWT_SECRET\
-- \DATABASE_PATH\
+We include example env files for both services:
+
+- [backend/.env.example](backend/.env.example) — copy to `backend/.env` and set values
+- [frontend/.env.example](frontend/.env.example) — copy to `frontend/.env` (sets `NEXT_PUBLIC_API_URL`)
+
+Important variables:
+
+- `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` — OAuth credentials (optional for test login)
+- `JWT_SECRET` — Use a strong secret in production
+- `DATABASE_PATH` — SQLite file location for local dev
 
 ## Testing
-\\\ash
-# Backend tests
+Run backend tests (if implemented):
+
+```bash
 cd backend
 npm test
+```
 
-# Frontend tests  
+Run frontend tests (if implemented):
+
+```bash
 cd frontend
 npm test
-\\\
+```
+
+## Submission
+Create a private GitHub repository with the project and include:
+
+- This repository contents
+- `backend/.env.example` and `frontend/.env.example`
+- A short deployment/testing note in the README describing how to run the app locally and any caveats (ports, OAuth setup)
+
+Optional: include a short write-up of design decisions and security notes.
 
 ## License
 MIT

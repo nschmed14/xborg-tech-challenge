@@ -3,6 +3,6 @@ builder = "nixpacks"
 buildCommand = "npm run build:all"
 
 [deploy]
-startCommand = "./start-railway.sh"
+startCommand = "bash start-railway.sh"
 healthcheckPath = "/health"
 healthcheckTimeout = 60

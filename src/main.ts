@@ -14,6 +14,12 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
   
+  // Add request logging middleware
+  app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} ${req.method} ${req.url}`);
+    next();
+  });
+  
   // Railway provides PORT environment variable
   const port = process.env.PORT || 3001;
   await app.listen(port, '0.0.0.0'); // Listen on all interfaces

@@ -1,0 +1,18 @@
+[build]
+builder = "nixpacks"
+buildCommand = "cd backend && npm install && npm run build"
+
+[deploy]
+startCommand = "cd backend && npm run start:prod"
+healthcheckPath = "/health"
+healthcheckTimeout = 10
+restartPolicyType = "always"
+
+[environments.production.variables]
+PORT = "3001"
+
+[[services]]
+name = "backend"
+port = 3001
+protocol = "http"
+internal = false

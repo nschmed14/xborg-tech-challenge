@@ -1,13 +1,20 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+// Use Railway URL in production, localhost in development
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 
+  (process.env.NODE_ENV === 'production' 
+    ? 'https://xborg-tech-challenge-production.up.railway.app' 
+    : 'http://localhost:3001');
+
+console.log('🔧 API Base URL:', API_BASE_URL);
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 // Request interceptor to add token
@@ -16,6 +23,7 @@ api.interceptors.request.use(
     const token = Cookies.get('auth_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      console.log('🔑 Adding Authorization header');
     }
     return config;
   },
@@ -28,12 +36,7 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      // Redirect to login if unauthorized
-      Cookies.remove('auth_token');
-      Cookies.remove('user');
-      window.location.href = '/auth/signin';
-    }
+    console.error('❌ API Error:', error.response?.data || error.message);
     return Promise.reject(error);
   }
 );

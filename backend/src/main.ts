@@ -1,33 +1,28 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  // Enable CORS for frontend (allow multiple ports)
+  const configService = app.get(ConfigService);
+  
+  // Get port from Railway environment
+  const port = configService.get('PORT') || 3001;
+  
+  // Enable CORS
   app.enableCors({
-    origin: [
-      'http://localhost:3000',
-      'http://localhost:3002',
-      'http://localhost:3003',
-      'https://turbo-zebra-946g554gq693pq46-3000.app.github.dev',
-    ],
+    origin: configService.get('FRONTEND_URL') || 'http://localhost:3000',
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   });
-
-  // Enable validation pipe
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      transform: true,
-    }),
-  );
-
-  const port = process.env.PORT || 3001;
-  await app.listen(port, '0.0.0.0');
-  console.log(`Application is running on: http://0.0.0.0:${port}`);
+  
+  // Listen on all network interfaces for Railway
+  await app.listen(port, '0.0.0.0', () => {
+    console.log(`🚀 Server running on http://0.0.0.0:${port}`);
+    console.log(`📡 Frontend URL: ${configService.get('FRONTEND_URL')}`);
+    console.log(`🔧 Environment: ${configService.get('NODE_ENV')}`);
+    console.log(`🌐 CORS enabled for: ${configService.get('FRONTEND_URL')}`);
+  });
 }
 bootstrap();

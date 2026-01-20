@@ -1,16 +1,41 @@
-import { Controller, Get } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { Controller, Get, Post } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('auth/simple')
 export class SimpleTestController {
-  constructor(private authService: AuthService) {}
+  constructor(private readonly jwtService: JwtService) {}
 
   @Get('token')
-  async getToken() {
-    // Simple token response for testing
+  getSimpleToken() {
+    const testUser = {
+      id: 1,
+      email: 'test@example.com',
+      name: 'Test User',
+    };
+
+    const token = this.jwtService.sign(testUser);
+    
     return {
-      token: 'test-token-123',
-      message: 'Use this token for testing: Bearer test-token-123',
+      access_token: token,
+      user: testUser,
+      message: 'Simple test token for Railway health checks',
+    };
+  }
+
+  @Post('login')
+  simpleLogin() {
+    const testUser = {
+      id: 1,
+      email: 'test@example.com',
+      name: 'Test User',
+    };
+
+    const token = this.jwtService.sign(testUser);
+    
+    return {
+      access_token: token,
+      user: testUser,
+      message: 'Simple POST login endpoint',
     };
   }
 }

@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UserService } from '../user/user.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from '../user/entities/user.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly userService: UserService,
-    private readonly jwtService: JwtService,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+    private jwtService: JwtService,
   ) {}
 
   async validateGoogleUser(googleProfile: {
@@ -15,7 +18,20 @@ export class AuthService {
     name: string;
     picture?: string;
   }) {
-    const user = await this.userService.findOrCreate(googleProfile);
+    // Find or create user
+    let user = await this.userRepository.findOne({
+      where: { email: googleProfile.email },
+    });
+
+    if (!user) {
+      user = this.userRepository.create({
+        email: googleProfile.email,
+        full_name: googleProfile.name,
+        google_id: googleProfile.googleId,
+        avatar_url: googleProfile.picture,
+      });
+      await this.userRepository.save(user);
+    }
 
     // Generate JWT token
     const payload = {
@@ -47,5 +63,26 @@ export class AuthService {
     } catch (error) {
       return null;
     }
+  }
+
+  // Helper method for test login
+  async findOrCreateTestUser() {
+    let user = await this.userRepository.findOne({
+      where: { email: 'test@example.com' },
+    });
+
+    if (!user) {
+      user = this.userRepository.create({
+        email: 'test@example.com',
+        full_name: 'Test User',
+        google_id: 'test-google-id',
+        github_url: 'https://github.com/test',
+        resume_url: 'https://example.com/resume',
+        motivation: 'I want to join XBorg because I am passionate about AI and fan engagement...',
+      });
+      await this.userRepository.save(user);
+    }
+
+    return user;
   }
 }

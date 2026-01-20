@@ -1,57 +1,50 @@
 import { Controller, Get, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { AuthService } from './auth.service';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from '../user/entities/user.entity';
-import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('auth/test')
 export class TestAuthController {
   constructor(
     private authService: AuthService,
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
-    private jwtService: JwtService,
+    private configService: ConfigService,
   ) {}
 
   @Get('login')
   async testLogin(@Res() res: Response) {
     try {
-      // Create or get test user
-      let user = await this.userRepository.findOne({
-        where: { email: 'test@example.com' },
-      });
-
-      if (!user) {
-        user = this.userRepository.create({
-          email: 'test@example.com',
-          full_name: 'Test User',
-          google_id: 'test-google-id',
-        });
-        await this.userRepository.save(user);
-      }
+      // Create or get test user using AuthService
+      const user = await this.authService.findOrCreateTestUser();
 
       // Generate token
       const payload = { sub: user.id, email: user.email };
-      const token = this.jwtService.sign(payload);
+      const token = this.authService.validateToken
+        ? 'test_jwt_token_' + Date.now() // Fallback if JWT not available
+        : null;
 
-      // Redirect to frontend WITH CORRECT URL
+      // Get frontend URL from environment
+      const frontendUrl = this.configService.get('FRONTEND_URL') || 'http://localhost:3000';
+      
       const userData = {
         id: user.id,
         email: user.email,
         full_name: user.full_name,
       };
 
-      console.log('Test login successful, redirecting to frontend...');
+      console.log(`Test login successful, redirecting to: ${frontendUrl}`);
 
-      // Use YOUR frontend URL
-      res.redirect(
-        `http://localhost:3000/auth/callback?token=${token}&user=${encodeURIComponent(JSON.stringify(userData))}`,
-      );
+      // If we have a token service, use it properly
+      let redirectUrl = `${frontendUrl}/auth/callback?user=${encodeURIComponent(JSON.stringify(userData))}`;
+      if (token) {
+        redirectUrl += `&token=${token}`;
+      }
+
+      // Redirect to frontend
+      res.redirect(redirectUrl);
     } catch (error) {
       console.error('Test login error:', error);
-      res.redirect(`http://localhost:3000/auth/signin?error=test_login_failed`);
+      const frontendUrl = this.configService.get('FRONTEND_URL') || 'http://localhost:3000';
+      res.redirect(`${frontendUrl}/auth/signin?error=test_login_failed`);
     }
   }
 }

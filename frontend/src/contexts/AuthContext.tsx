@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import Cookies from 'js-cookie';
+import api from '@/lib/api';
 
 interface User {
   id: string;
@@ -44,13 +45,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     if (storedToken && storedUser) {
       setToken(storedToken);
-      try {
-        setUser(JSON.parse(storedUser));
-      } catch (e) {
-        console.error('Error parsing user data:', e);
-        Cookies.remove('user');
-        Cookies.remove('access_token');
-      }
+      setUser(JSON.parse(storedUser));
     }
     setIsLoading(false);
   }, []);

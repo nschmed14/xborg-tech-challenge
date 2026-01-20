@@ -1,14 +1,8 @@
 [build]
-builder = "NIXPACKS"
+builder = "nixpacks"
 buildCommand = "npm run build:all"
 
 [deploy]
-startCommand = "cd backend && node dist/main"
+startCommand = "node dist/main.js"
 healthcheckPath = "/health"
-healthcheckTimeout = 10
-restartPolicyType = "always"
-
-[[services]]
-name = "backend"
-port = 3001
-protocol = "http"
+healthcheckTimeout = 60

@@ -6,11 +6,26 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(private configService: ConfigService) {
+    const clientID = configService.get('GOOGLE_CLIENT_ID');
+    const clientSecret = configService.get('GOOGLE_CLIENT_SECRET');
+    const callbackURL = configService.get('GOOGLE_CALLBACK_URL');
+    
+    console.log('Google OAuth Config:', { 
+      hasClientID: !!clientID,
+      hasClientSecret: !!clientSecret,
+      callbackURL 
+    });
+    
+    if (!clientID || !clientSecret || !callbackURL) {
+      throw new Error('Missing Google OAuth configuration. Check GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_CALLBACK_URL environment variables.');
+    }
+    
     super({
-      clientID: configService.get('GOOGLE_CLIENT_ID') || 'dummy-client-id',
-      clientSecret: configService.get('GOOGLE_CLIENT_SECRET') || 'dummy-secret',
-      callbackURL: configService.get('GOOGLE_CALLBACK_URL') || 'http://localhost:3001/auth/validate/google',
+      clientID,
+      clientSecret,
+      callbackURL,
       scope: ['email', 'profile'],
+      passReqToCallback: false,
     });
   }
 
@@ -20,6 +35,8 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     profile: any,
     done: VerifyCallback,
   ) {
+    console.log('Google OAuth Profile:', profile.id);
+    
     const { name, emails, photos } = profile;
     const user = {
       email: emails[0].value,

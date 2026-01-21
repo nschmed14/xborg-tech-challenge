@@ -14,7 +14,7 @@ export class User {
   @Column({ nullable: true })
   avatar_url: string;
 
-  @Column({ nullable: true, unique: true })
+  @Column({ nullable: true })
   google_id: string;
 
   @Column({ nullable: true })

@@ -25,6 +25,7 @@ export class UserService implements OnModuleInit {
   }
 
   async findByGoogleId(googleId: string): Promise<User | null> {
+    if (!googleId) return null;
     return this.usersRepository.findOne({ where: { google_id: googleId } });
   }
 
@@ -35,9 +36,13 @@ export class UserService implements OnModuleInit {
   async createOrUpdate(userData: Partial<User>): Promise<User> {
     let user: User;
     
+    // First try to find by google_id if provided
     if (userData.google_id) {
       user = await this.findByGoogleId(userData.google_id);
-    } else if (userData.email) {
+    }
+    
+    // If not found by google_id, try by email
+    if (!user && userData.email) {
       user = await this.findByEmail(userData.email);
     }
 

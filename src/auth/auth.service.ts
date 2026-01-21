@@ -15,7 +15,7 @@ export class AuthService {
       email: userData.email,
       full_name: userData.full_name,
       avatar_url: userData.avatar_url,
-      google_id: userData.google_id,
+      google_id: userData.google_id || null, // Ensure google_id is null if not provided
     });
 
     const payload = { email: user.email, sub: user.id };
@@ -36,6 +36,7 @@ export class AuthService {
       email: 'test@example.com',
       full_name: 'Test User',
       avatar_url: 'https://via.placeholder.com/150',
+      google_id: null, // Explicitly set google_id to null for test user
     };
     
     // Create or get test user

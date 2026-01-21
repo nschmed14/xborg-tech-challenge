@@ -7,7 +7,8 @@ export class AppController {
     return { 
       status: 'OK', 
       timestamp: new Date().toISOString(),
-      message: 'Application is healthy'
+      message: 'Application is healthy',
+      uptime: process.uptime(),
     };
   }
 
@@ -31,3 +32,4 @@ export class AppController {
     };
   }
 }
+

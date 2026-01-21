@@ -24,9 +24,27 @@ async function bootstrap() {
   
   // Railway provides PORT environment variable
   const port = process.env.PORT || 3001;
-  await app.listen(port, '0.0.0.0'); // Listen on all interfaces
-  console.log(`Application is running on: http://0.0.0.0:${port}`);
-  console.log(`CORS Origin: ${corsOrigin}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  
+  try {
+    await app.listen(port, '0.0.0.0'); // Listen on all interfaces
+    console.log(`✓ Application is running on http://0.0.0.0:${port}`);
+    console.log(`✓ CORS Origin: ${corsOrigin}`);
+    console.log(`✓ Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log('✓ Server ready to accept requests');
+  } catch (error) {
+    console.error('✗ Failed to start server:', error);
+    process.exit(1);
+  }
 }
+
+// Error handling for unhandled rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  process.exit(1);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+  process.exit(1);
+});
 bootstrap();

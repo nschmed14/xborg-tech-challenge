@@ -12,7 +12,9 @@ const getTypeOrmConfig = (): TypeOrmModuleOptions => {
     logging: process.env.NODE_ENV === 'development',
   };
 
-  if (process.env.DATABASE_URL) {
+  // Check if DATABASE_URL is set and not empty
+  if (process.env.DATABASE_URL && process.env.DATABASE_URL.trim().length > 0) {
+    console.log('Using PostgreSQL database');
     return {
       ...baseConfig,
       type: 'postgres',
@@ -21,6 +23,7 @@ const getTypeOrmConfig = (): TypeOrmModuleOptions => {
     } as TypeOrmModuleOptions;
   }
 
+  console.log('Using SQLite database (DATABASE_URL not configured)');
   return {
     ...baseConfig,
     type: 'sqlite',

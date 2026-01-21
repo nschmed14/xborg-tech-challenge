@@ -2,9 +2,12 @@ import { DataSource } from 'typeorm';
 import { User } from './user/entities/user.entity';
 
 export const AppDataSource = new DataSource({
-  type: 'sqlite',
-  database: process.env.DATABASE_PATH || 'database.sqlite',
+  type: 'postgres',
+  url: process.env.DATABASE_URL,
   entities: [User],
   migrations: [],
   synchronize: true,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });

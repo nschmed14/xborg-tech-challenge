@@ -2,32 +2,52 @@
 > backend@0.0.1 start
 > node dist/main
 
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:26 PM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:26 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +19ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:26 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:26 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDatabaseModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:26 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:26 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:26 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:26 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:26 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +2ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +38ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUserModule dependencies initialized[39m[38;5;3m +3ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +8ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +4ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/health, GET} route[39m[38;5;3m +1ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +0ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login/google, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/validate/google, GET} route[39m[38;5;3m +1ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/test-login, POST} route[39m[38;5;3m +1ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserController {/user}:[39m[38;5;3m +0ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/profile, GET} route[39m[38;5;3m +0ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/profile, PUT} route[39m[38;5;3m +1ms[39m
-[32m[Nest] 47190  - [39m01/20/2026, 9:16:27 PM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +3ms[39m
-Application is running on: http://0.0.0.0:3001
-CORS Origin: *
-Database: /tmp/data/database.sqlite
-2026-01-20T21:16:31.309Z GET /
-2026-01-20T21:16:31.324Z GET /health
+[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +39ms[39m
+[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +8ms[39m
+[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDatabaseModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +2ms[39m
+[31m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (1)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 3041  - [39m01/21/2026, 4:35:53 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (2)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 3041  - [39m01/21/2026, 4:35:56 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (3)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 3041  - [39m01/21/2026, 4:35:59 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (4)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 3041  - [39m01/21/2026, 4:36:02 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (5)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 3041  - [39m01/21/2026, 4:36:05 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (6)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 3041  - [39m01/21/2026, 4:36:08 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (7)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 3041  - [39m01/21/2026, 4:36:11 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (8)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 3041  - [39m01/21/2026, 4:36:14 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (9)...[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)
+[31m[Nest] 3041  - [39m01/21/2026, 4:36:14 AM [31m  ERROR[39m [38;5;3m[ExceptionHandler] [39m[31m[39m
+AggregateError [ECONNREFUSED]: 
+    at internalConnectMultiple (node:net:1134:18)
+    at afterConnectMultiple (node:net:1715:7)

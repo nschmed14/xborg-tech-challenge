@@ -12,11 +12,16 @@ import { User } from './user/entities/user.entity';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: process.env.DATABASE_PATH || 'database.sqlite',
-      entities: [User],
-      synchronize: process.env.NODE_ENV !== 'production',
+    TypeOrmModule.forRootAsync({
+      useFactory: () => ({
+        type: 'postgres',
+        url: process.env.DATABASE_URL,
+        entities: [User],
+        synchronize: process.env.NODE_ENV !== 'production',
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      }),
     }),
     AuthModule,
     UserModule,

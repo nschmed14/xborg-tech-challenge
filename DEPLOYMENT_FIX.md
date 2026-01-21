@@ -1,14 +1,34 @@
 # Google OAuth Deployment Fix
 
 ## Issue
-Google OAuth sign-in fails on deployed application with "redirect_uri_mismatch" or similar error.
+Google OAuth sign-in fails on deployed application with either:
+1. "redirect_uri_mismatch" error (Google Console not configured)
+2. "Missing authentication parameters" error (Backend not sending user data)
 
-## Root Cause
-The Google Cloud Console OAuth 2.0 credentials don't have the deployed backend callback URL in the authorized redirect URIs list.
+## Root Causes
+1. The Google Cloud Console OAuth 2.0 credentials don't have the deployed backend callback URL in the authorized redirect URIs list.
+2. **[FIXED]** The backend OAuth callback was only sending the token, not the user data that the frontend expects.
 
 ## Solution Steps
 
-### 1. Update Google Cloud Console
+### ✅ Code Fix Applied
+
+**The backend has been updated** to include user data in the OAuth callback redirect. The changes have been committed and pushed to your repository.
+
+**What was fixed:**
+- Modified `src/auth/auth.controller.ts` to pass both `token` and `user` parameters to the frontend callback
+- The redirect URL now includes: `?token=<jwt>&user=<encoded_user_json>`
+
+### 1. Deploy the Backend Fix to Railway
+
+Railway should auto-deploy the fix automatically. To verify:
+
+1. Go to [Railway Dashboard](https://railway.app/dashboard)
+2. Check your project deployment status
+3. Wait for the build to complete (~2-5 minutes)
+4. OR manually trigger a redeploy if needed
+
+### 2. Update Google Cloud Console
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Navigate to **APIs & Services** → **Credentials**
@@ -25,7 +45,7 @@ The Google Cloud Console OAuth 2.0 credentials don't have the deployed backend c
    ```
 7. Click **SAVE**
 
-### 2. Verify Railway Environment Variables
+### 3. Verify Railway Environment Variables
 
 Make sure Railway has these environment variables configured:
 
@@ -40,7 +60,7 @@ PORT=3001
 NODE_ENV=production
 ```
 
-### 3. Verify Vercel Environment Variables
+### 4. Verify Vercel Environment Variables
 
 Make sure Vercel has this environment variable:
 
@@ -48,7 +68,7 @@ Make sure Vercel has this environment variable:
 NEXT_PUBLIC_API_URL=https://xborg-tech-challenge-production.up.railway.app
 ```
 
-### 4. Test the Fix
+### 5. Test the Fix
 
 1. Visit: https://xborg-tech-challenge-rose.vercel.app
 2. Click "Sign in with Google"
@@ -56,7 +76,7 @@ NEXT_PUBLIC_API_URL=https://xborg-tech-challenge-production.up.railway.app
 4. After authorizing, you'll be redirected back to your app with a JWT token
 5. You should land on the profile page
 
-### 5. Common Issues
+### 6. Common Issues
 
 **Issue: Still getting redirect_uri_mismatch**
 - Make sure the URL in Google Console matches EXACTLY (including https://, no trailing slash)

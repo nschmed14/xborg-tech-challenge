@@ -6,9 +6,13 @@ import { UserModule } from './user/user.module';
 import { LoggingMiddleware } from './auth/logging.middleware';
 
 const getTypeOrmConfig = (): TypeOrmModuleOptions => {
+  const isProduction = process.env.NODE_ENV === 'production';
+  
   const baseConfig = {
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    synchronize: true,
+    // Disable synchronize for production - causes startup hangs
+    // Database schema should already exist
+    synchronize: !isProduction,
     logging: process.env.NODE_ENV === 'development',
   };
 
@@ -19,13 +23,13 @@ const getTypeOrmConfig = (): TypeOrmModuleOptions => {
       ...baseConfig,
       type: 'postgres',
       url: process.env.DATABASE_URL,
-      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+      ssl: isProduction ? { rejectUnauthorized: false } : false,
       // Connection pool settings for Railway
       extra: {
         max: 5,
         min: 1,
         idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 10000,
+        connectionTimeoutMillis: 5000,
       },
     } as TypeOrmModuleOptions;
   }

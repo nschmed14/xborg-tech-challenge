@@ -1,27 +1,25 @@
 import { Module } from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { UserModule } from '../user/user.module';
+import { JwtModule } from '@nestjs/jwt';
+import { TestController } from './test.controller';
 
 @Module({
   imports: [
-    PassportModule,
+    ConfigModule,
+    UserModule,
     JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        secret: configService.get('JWT_SECRET') || 'fallback-secret',
+      useFactory: async () => ({
+        secret: process.env.JWT_SECRET,
         signOptions: { expiresIn: '7d' },
       }),
-      inject: [ConfigService],
     }),
-    UserModule,
   ],
-  controllers: [AuthController],
+  controllers: [AuthController, TestController],
   providers: [AuthService, GoogleStrategy, JwtStrategy],
   exports: [AuthService],
 })

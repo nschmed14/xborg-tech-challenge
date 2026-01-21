@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deployed App Debug</title>
+</head>
+<body>
+    <h1>XBorg Challenge - Deployment Debug</h1>
+    
+    <h2>Test 1: Direct Backend OAuth</h2>
+    <a href="https://xborg-tech-challenge-production.up.railway.app/auth/login/google" target="_blank">
+        Test backend OAuth directly
+    </a>
+    
+    <h2>Test 2: Frontend Login</h2>
+    <a href="https://xborg-tech-challenge-rose.vercel.app" target="_blank">
+        Go to frontend and try login
+    </a>
+    
+    <h2>Test 3: API Configuration</h2>
+    <button onclick="testConfig()">Test Backend Config</button>
+    <div id="configResult" style="margin: 10px; padding: 10px; border: 1px solid #ccc;"></div>
+    
+    <h2>Common Issues:</h2>
+    <ul>
+        <li>Google Cloud Console redirect URI must match exactly</li>
+        <li>OAuth consent screen must be published</li>
+        <li>If using restricted Gmail accounts, add them as test users</li>
+        <li>CORS must be configured on backend</li>
+    </ul>
+    
+    <script>
+        async function testConfig() {
+            const resultDiv = document.getElementById('configResult');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('https://xborg-tech-challenge-production.up.railway.app/test/config');
+                if (response.ok) {
+                    const data = await response.json();
+                    resultDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                } else {
+                    resultDiv.innerHTML = `Error: ${response.status} ${response.statusText}`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `Fetch error: ${error.message}`;
+            }
+        }
+        
+        // Auto-test on load
+        window.onload = testConfig;
+    </script>
+</body>
+</html>

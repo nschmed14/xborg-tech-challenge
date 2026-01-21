@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CORS Test</title>
+</head>
+<body>
+    <h1>CORS Test: Frontend → Backend</h1>
+    
+    <button onclick="testCORS()">Test CORS</button>
+    <button onclick="testLogin()">Test Login Redirect</button>
+    
+    <div id="result" style="margin: 20px; padding: 15px; border: 1px solid #ccc;"></div>
+    
+    <script>
+        const result = document.getElementById('result');
+        const backend = 'https://xborg-tech-challenge-production.up.railway.app';
+        
+        async function testCORS() {
+            result.innerHTML = 'Testing CORS...';
+            try {
+                const response = await fetch(`${backend}/health`, {
+                    method: 'GET',
+                    headers: {
+                        'Origin': 'https://xborg-tech-challenge-rose.vercel.app'
+                    }
+                });
+                
+                const corsHeaders = {
+                    'access-control-allow-origin': response.headers.get('access-control-allow-origin'),
+                    'access-control-allow-credentials': response.headers.get('access-control-allow-credentials')
+                };
+                
+                result.innerHTML = `
+                    Status: ${response.status}<br>
+                    CORS Headers:<br>
+                    <pre>${JSON.stringify(corsHeaders, null, 2)}</pre>
+                    Response: ${await response.text()}
+                `;
+            } catch (error) {
+                result.innerHTML = `CORS Error: ${error.message}`;
+            }
+        }
+        
+        function testLogin() {
+            // Direct OAuth test
+            window.open(`${backend}/auth/login/google`, '_blank');
+            result.innerHTML = 'Opened OAuth login in new tab. Check if Google shows "Missing authentication parameters"';
+        }
+    </script>
+</body>
+</html>

@@ -1,53 +1,112 @@
 
-> backend@0.0.1 start
-> node dist/main
+> backend@0.0.1 start:dev
+> nest start --watch
 
-[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
-[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +39ms[39m
-[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +8ms[39m
-[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDatabaseModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
-[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
-[32m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +2ms[39m
-[31m[Nest] 3041  - [39m01/21/2026, 4:35:50 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (1)...[39m
-AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-[31m[Nest] 3041  - [39m01/21/2026, 4:35:53 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (2)...[39m
-AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-[31m[Nest] 3041  - [39m01/21/2026, 4:35:56 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (3)...[39m
-AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-[31m[Nest] 3041  - [39m01/21/2026, 4:35:59 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (4)...[39m
-AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-[31m[Nest] 3041  - [39m01/21/2026, 4:36:02 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (5)...[39m
-AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-[31m[Nest] 3041  - [39m01/21/2026, 4:36:05 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (6)...[39m
-AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-[31m[Nest] 3041  - [39m01/21/2026, 4:36:08 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (7)...[39m
-AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-[31m[Nest] 3041  - [39m01/21/2026, 4:36:11 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (8)...[39m
-AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-[31m[Nest] 3041  - [39m01/21/2026, 4:36:14 AM [31m  ERROR[39m [38;5;3m[TypeOrmModule] [39m[31mUnable to connect to the database. Retrying (9)...[39m
-AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
-[31m[Nest] 3041  - [39m01/21/2026, 4:36:14 AM [31m  ERROR[39m [38;5;3m[ExceptionHandler] [39m[31m[39m
-AggregateError [ECONNREFUSED]: 
-    at internalConnectMultiple (node:net:1134:18)
-    at afterConnectMultiple (node:net:1715:7)
+[2J[3J[H[[90m8:12:43 AM[0m] Starting compilation in watch mode...
+
+[96msrc/auth/auth.module.ts[0m:[93m2[0m:[93m10[0m - [91merror[0m[90m TS2300: [0mDuplicate identifier 'TestController'.
+
+[7m2[0m import { TestController } from './test.controller';
+[7m [0m [91m         ~~~~~~~~~~~~~~[0m
+
+[96msrc/auth/auth.module.ts[0m:[93m4[0m:[93m10[0m - [91merror[0m[90m TS2300: [0mDuplicate identifier 'TestController'.
+
+[7m4[0m import { TestController } from './test.controller';
+[7m [0m [91m         ~~~~~~~~~~~~~~[0m
+
+[96msrc/auth/auth.module.ts[0m:[93m6[0m:[93m10[0m - [91merror[0m[90m TS2300: [0mDuplicate identifier 'TestController'.
+
+[7m6[0m import { TestController } from './test.controller';
+[7m [0m [91m         ~~~~~~~~~~~~~~[0m
+
+[96msrc/auth/auth.module.ts[0m:[93m8[0m:[93m10[0m - [91merror[0m[90m TS2300: [0mDuplicate identifier 'TestController'.
+
+[7m8[0m import { TestController } from './test.controller';
+[7m [0m [91m         ~~~~~~~~~~~~~~[0m
+
+[96msrc/auth/auth.module.ts[0m:[93m10[0m:[93m10[0m - [91merror[0m[90m TS2300: [0mDuplicate identifier 'TestController'.
+
+[7m10[0m import { TestController } from './test.controller';
+[7m  [0m [91m         ~~~~~~~~~~~~~~[0m
+
+[96msrc/auth/auth.module.ts[0m:[93m12[0m:[93m10[0m - [91merror[0m[90m TS2300: [0mDuplicate identifier 'TestController'.
+
+[7m12[0m import { TestController } from './test.controller';
+[7m  [0m [91m         ~~~~~~~~~~~~~~[0m
+
+[96msrc/auth/auth.module.ts[0m:[93m14[0m:[93m10[0m - [91merror[0m[90m TS2300: [0mDuplicate identifier 'TestController'.
+
+[7m14[0m import { TestController } from './test.controller';
+[7m  [0m [91m         ~~~~~~~~~~~~~~[0m
+
+[96msrc/auth/auth.module.ts[0m:[93m16[0m:[93m10[0m - [91merror[0m[90m TS2300: [0mDuplicate identifier 'TestController'.
+
+[7m16[0m import { TestController } from './test.controller';
+[7m  [0m [91m         ~~~~~~~~~~~~~~[0m
+
+[96msrc/auth/auth.module.ts[0m:[93m18[0m:[93m10[0m - [91merror[0m[90m TS2300: [0mDuplicate identifier 'TestController'.
+
+[7m18[0m import { TestController } from './test.controller';
+[7m  [0m [91m         ~~~~~~~~~~~~~~[0m
+
+[96msrc/auth/auth.module.ts[0m:[93m34[0m:[93m3[0m - [91merror[0m[90m TS2561: [0mObject literal may only specify known properties, but 'TestController' does not exist in type 'ModuleMetadata'. Did you mean to write 'controllers'?
+
+[7m34[0m   TestController,
+[7m  [0m [91m  ~~~~~~~~~~~~~~[0m
+
+[[90m8:12:46 AM[0m] Found 10 errors. Watching for file changes.
+
+(node:45440) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+/workspaces/xborg-tech-challenge/node_modules/@nestjs/common/utils/validate-module-keys.util.js:19
+        throw new Error((0, exports.INVALID_MODULE_CONFIG_MESSAGE) `${key}`);
+        ^
+
+Error: Invalid property 'TestController' passed into the @Module() decorator.
+    at validateKey (/workspaces/xborg-tech-challenge/node_modules/@nestjs/common/utils/validate-module-keys.util.js:19:15)
+    at Array.forEach (<anonymous>)
+    at validateModuleKeys (/workspaces/xborg-tech-challenge/node_modules/@nestjs/common/utils/validate-module-keys.util.js:21:10)
+    at Module (/workspaces/xborg-tech-challenge/node_modules/@nestjs/common/decorators/modules/module.decorator.js:21:56)
+    at Object.<anonymous> (/workspaces/xborg-tech-challenge/src/auth/auth.module.ts:20:8)
+    at Module._compile (node:internal/modules/cjs/loader:1761:14)
+    at Object..js (node:internal/modules/cjs/loader:1893:10)
+    at Module.load (node:internal/modules/cjs/loader:1481:32)
+    at Module._load (node:internal/modules/cjs/loader:1300:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+
+Node.js v24.11.1
+[2J[3J[H[[90m8:15:02 AM[0m] File change detected. Starting incremental compilation...
+
+[[90m8:15:02 AM[0m] Found 0 errors. Watching for file changes.
+
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +234ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+=== Google OAuth Configuration ===
+Client ID present: true
+Client Secret present: true
+Callback URL: http://localhost:3001/auth/validate/google
+===============================
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmCoreModule dependencies initialized[39m[38;5;3m +48ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTypeOrmModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUserModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/auth}:[39m[38;5;3m +6ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/status, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/login/google, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/validate/google, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/auth/test-login, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mTestController {/test}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/test/config, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/test/oauth, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserController {/user}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/profile, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/user/profile, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 47604  - [39m01/21/2026, 8:15:03 AM [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +3ms[39m
+Application is running on: http://0.0.0.0:3001
+CORS Origin: http://localhost:3000
+Environment: development

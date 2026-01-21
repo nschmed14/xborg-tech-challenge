@@ -8,7 +8,14 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
   constructor(private configService: ConfigService) {
     const clientID = configService.get('GOOGLE_CLIENT_ID');
     const clientSecret = configService.get('GOOGLE_CLIENT_SECRET');
-    const callbackURL = configService.get('GOOGLE_CALLBACK_URL');
+    let callbackURL = configService.get('GOOGLE_CALLBACK_URL');
+    
+    // Auto-generate callback URL if not provided
+    if (!callbackURL) {
+      const apiUrl = configService.get('API_URL') || 'http://localhost:3001';
+      callbackURL = `${apiUrl}/auth/validate/google`;
+      console.log('Auto-generated GOOGLE_CALLBACK_URL:', callbackURL);
+    }
     
     console.log('=== Google OAuth Configuration ===');
     console.log('Client ID present:', !!clientID);
@@ -16,8 +23,8 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     console.log('Callback URL:', callbackURL);
     console.log('===============================');
     
-    if (!clientID || !clientSecret || !callbackURL) {
-      throw new Error('Missing Google OAuth configuration. Check GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, and GOOGLE_CALLBACK_URL environment variables.');
+    if (!clientID || !clientSecret) {
+      throw new Error('Missing Google OAuth configuration. Check GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.');
     }
     
     super({

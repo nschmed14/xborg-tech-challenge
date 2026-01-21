@@ -39,8 +39,15 @@ export class AuthController {
       
       const result = await this.authService.login(req.user);
       
-      // Redirect to frontend with token and user data
-      const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+      // Determine frontend URL from multiple sources
+      let frontendUrl = process.env.FRONTEND_URL;
+      
+      // If not set or looks like old URL, use the Vercel production URL
+      if (!frontendUrl || frontendUrl.includes('frontend-ten-liard')) {
+        frontendUrl = 'https://xborg-tech-challenge-rose.vercel.app';
+        console.log('Using hardcoded Vercel URL:', frontendUrl);
+      }
+      
       const userParam = encodeURIComponent(JSON.stringify(result.user));
       const redirectUrl = `${frontendUrl}/auth/callback?token=${result.access_token}&user=${userParam}`;
       
@@ -48,7 +55,10 @@ export class AuthController {
       res.redirect(redirectUrl);
     } catch (error) {
       console.error('Google OAuth callback error:', error);
-      const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+      let frontendUrl = process.env.FRONTEND_URL;
+      if (!frontendUrl || frontendUrl.includes('frontend-ten-liard')) {
+        frontendUrl = 'https://xborg-tech-challenge-rose.vercel.app';
+      }
       res.redirect(`${frontendUrl}/auth/error?message=${encodeURIComponent(error.message)}`);
     }
   }

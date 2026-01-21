@@ -13,15 +13,27 @@ import { User } from './user/entities/user.entity';
       isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
-      useFactory: () => ({
-        type: 'postgres',
-        url: process.env.DATABASE_URL,
-        entities: [User],
-        synchronize: process.env.NODE_ENV !== 'production',
-        ssl: {
-          rejectUnauthorized: false,
-        },
-      }),
+      useFactory: () => {
+        // Use PostgreSQL if DATABASE_URL is provided (Railway), otherwise SQLite (local)
+        if (process.env.DATABASE_URL) {
+          return {
+            type: 'postgres',
+            url: process.env.DATABASE_URL,
+            entities: [User],
+            synchronize: process.env.NODE_ENV !== 'production',
+            ssl: process.env.NODE_ENV === 'production' ? {
+              rejectUnauthorized: false,
+            } : false,
+          };
+        } else {
+          return {
+            type: 'sqlite',
+            database: process.env.DATABASE_PATH || 'database.sqlite',
+            entities: [User],
+            synchronize: true,
+          };
+        }
+      },
     }),
     AuthModule,
     UserModule,

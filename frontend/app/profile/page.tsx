@@ -5,6 +5,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
 
+export const dynamic = 'force-dynamic';
+
 interface ProfileData {
   full_name: string;
   github_url: string;

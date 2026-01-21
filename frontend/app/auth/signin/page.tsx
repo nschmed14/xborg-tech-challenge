@@ -4,6 +4,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export default function SignInPage() {
   const { user, isLoading } = useAuth();
   const router = useRouter();

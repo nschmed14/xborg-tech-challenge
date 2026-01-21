@@ -2,7 +2,7 @@
   "build": {
     "env": {
       "NEXT_PUBLIC_API_URL": "https://xborg-tech-challenge-production.up.railway.app",
-      "NEXT_PUBLIC_FRONTEND_URL": "https://frontend-ten-liard-73.vercel.app"
+      "NEXT_PUBLIC_FRONTEND_URL": "https://xborg-tech-challenge-rose.vercel.app"
     }
   }
 }

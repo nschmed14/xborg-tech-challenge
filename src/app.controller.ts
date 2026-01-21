@@ -2,6 +2,15 @@ import { Controller, Get } from '@nestjs/common';
 
 @Controller()
 export class AppController {
+  @Get('health')
+  getHealth() {
+    return { 
+      status: 'OK', 
+      timestamp: new Date().toISOString(),
+      message: 'Application is healthy'
+    };
+  }
+
   @Get()
   getRoot(): { 
     message: string; 
@@ -19,14 +28,6 @@ export class AppController {
         'GET  /user/profile (requires JWT)',
         'PUT  /user/profile (requires JWT)',
       ]
-    };
-  }
-
-  @Get('health')
-  getHealth(): { status: string; timestamp: string } {
-    return { 
-      status: 'OK', 
-      timestamp: new Date().toISOString() 
     };
   }
 }

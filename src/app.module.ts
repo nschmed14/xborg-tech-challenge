@@ -1,9 +1,32 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { LoggingMiddleware } from './auth/logging.middleware';
+
+const getTypeOrmConfig = (): TypeOrmModuleOptions => {
+  const baseConfig = {
+    entities: [__dirname + '/**/*.entity{.ts,.js}'],
+    synchronize: true,
+    logging: process.env.NODE_ENV === 'development',
+  };
+
+  if (process.env.DATABASE_URL) {
+    return {
+      ...baseConfig,
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    } as TypeOrmModuleOptions;
+  }
+
+  return {
+    ...baseConfig,
+    type: 'sqlite',
+    database: process.env.DATABASE_PATH || 'database.sqlite',
+  } as TypeOrmModuleOptions;
+};
 
 @Module({
   imports: [
@@ -11,12 +34,7 @@ import { LoggingMiddleware } from './auth/logging.middleware';
       isGlobal: true,
       envFilePath: '.env',
     }),
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'database.sqlite',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(getTypeOrmConfig()),
     AuthModule,
     UserModule,
   ],

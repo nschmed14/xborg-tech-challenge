@@ -14,14 +14,18 @@ import { User } from './user/entities/user.entity';
     }),
     TypeOrmModule.forRootAsync({
       useFactory: () => {
+        const isProduction = process.env.NODE_ENV === 'production';
+        const resetDB = process.env.RESET_DB === 'true';
+        
         // Use PostgreSQL if DATABASE_URL is provided (Railway), otherwise SQLite (local)
         if (process.env.DATABASE_URL) {
           return {
             type: 'postgres',
             url: process.env.DATABASE_URL,
             entities: [User],
-            synchronize: process.env.NODE_ENV !== 'production',
-            ssl: process.env.NODE_ENV === 'production' ? {
+            synchronize: true, // Always synchronize
+            dropSchema: resetDB, // Drop schema if RESET_DB=true
+            ssl: isProduction ? {
               rejectUnauthorized: false,
             } : false,
           };
@@ -31,6 +35,7 @@ import { User } from './user/entities/user.entity';
             database: process.env.DATABASE_PATH || 'database.sqlite',
             entities: [User],
             synchronize: true,
+            dropSchema: resetDB,
           };
         }
       },

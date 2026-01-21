@@ -15,5 +15,13 @@ else
   echo "WARNING: DATABASE_URL not set!"
 fi
 
-# Start the application
+# Reset database if RESET_DB is true
+if [ "$RESET_DB" = "true" ]; then
+  echo "⚠️  RESET_DB=true - Dropping and recreating database schema..."
+  export TYPEORM_SYNCHRONIZE=true
+  # We'll rely on TypeORM's synchronize to recreate the schema
+  echo "Database will be reset on application startup"
+fi
+
+echo "Starting application..."
 node dist/main.js

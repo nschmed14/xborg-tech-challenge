@@ -20,6 +20,13 @@ const getTypeOrmConfig = (): TypeOrmModuleOptions => {
       type: 'postgres',
       url: process.env.DATABASE_URL,
       ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+      // Connection pool settings for Railway
+      extra: {
+        max: 5,
+        min: 1,
+        idleTimeoutMillis: 30000,
+        connectionTimeoutMillis: 10000,
+      },
     } as TypeOrmModuleOptions;
   }
 

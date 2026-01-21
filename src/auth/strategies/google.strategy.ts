@@ -12,8 +12,9 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     
     // Auto-generate callback URL if not provided
     if (!callbackURL) {
-      const apiUrl = configService.get('API_URL') || 'http://localhost:3001';
-      callbackURL = `${apiUrl}/auth/validate/google`;
+      // Try to use the Railway or configured URL first
+      const railwayUrl = 'https://xborg-tech-challenge-production.up.railway.app';
+      callbackURL = `${railwayUrl}/auth/validate/google`;
       console.log('Auto-generated GOOGLE_CALLBACK_URL:', callbackURL);
     }
     

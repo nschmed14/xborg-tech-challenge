@@ -34,11 +34,8 @@ echo "Starting application..."
 echo "Environment: ${NODE_ENV:-development}"
 echo "Port: ${PORT:-3001}"
 echo "Frontend URL: ${FRONTEND_URL}"
+echo "Google OAuth Callback URL will be auto-generated if needed"
+echo ""
 
-# Start the app with error handling
-node dist/main.js || {
-  echo "ERROR: Application failed to start!"
-  echo "Checking dist/main.js exists..."
-  ls -la dist/ || echo "dist/ directory not found!"
-  exit 1
-}
+# Start the app - Railway will handle the process
+exec node dist/main.js

@@ -7,34 +7,37 @@ import { LoggingMiddleware } from './auth/logging.middleware';
 
 const getTypeOrmConfig = (): TypeOrmModuleOptions => {
   const isProduction = process.env.NODE_ENV === 'production';
+  const isDevelopment = process.env.NODE_ENV === 'development' || !isProduction;
   
   const baseConfig = {
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    // Disable synchronize for production - causes startup hangs
-    // Database schema should already exist
-    synchronize: !isProduction,
-    logging: process.env.NODE_ENV === 'development',
+    synchronize: isDevelopment, // Only sync in development
+    logging: false, // Disable logging to speed up startup
+    cache: true, // Enable caching
   };
 
   // Check if DATABASE_URL is set and not empty
   if (process.env.DATABASE_URL && process.env.DATABASE_URL.trim().length > 0) {
-    console.log('Using PostgreSQL database');
+    console.log('Using PostgreSQL database (Production)');
     return {
       ...baseConfig,
       type: 'postgres',
       url: process.env.DATABASE_URL,
-      ssl: isProduction ? { rejectUnauthorized: false } : false,
-      // Connection pool settings for Railway
+      ssl: { rejectUnauthorized: false },
+      // Aggressive connection settings for Railway
       extra: {
-        max: 5,
-        min: 1,
-        idleTimeoutMillis: 30000,
-        connectionTimeoutMillis: 5000,
+        max: 3,
+        min: 0,
+        idleTimeoutMillis: 10000,
+        connectionTimeoutMillis: 3000,
+        statement_timeout: 5000,
       },
+      // Don't wait for database to be fully ready
+      keepConnectionAlive: true,
     } as TypeOrmModuleOptions;
   }
 
-  console.log('Using SQLite database (DATABASE_URL not configured)');
+  console.log('Using SQLite database (Development)');
   return {
     ...baseConfig,
     type: 'sqlite',

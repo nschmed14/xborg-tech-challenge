@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google OAuth Test</title>
+</head>
+<body>
+    <h1>Google OAuth Test</h1>
+    
+    <h2>Test 1: Direct backend OAuth</h2>
+    <a href="https://xborg-tech-challenge-production.up.railway.app/auth/login/google" target="_blank">
+        Sign in with Google (via backend)
+    </a>
+    
+    <h2>Test 2: Check configuration</h2>
+    <div id="config"></div>
+    
+    <script>
+        // Check backend config
+        fetch('https://xborg-tech-challenge-production.up.railway.app/auth/status')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('config').innerHTML = 
+                    `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            });
+    </script>
+</body>
+</html>

@@ -1,174 +1,86 @@
-﻿# XBorg Technical Challenge
+# XBorg Technical Challenge
 
-## Project Overview
-A full-stack application with Google OAuth authentication, user profile management, and JWT-based session handling.
+Live app: https://xborg-tech-challenge-rose.vercel.app  
+API: https://xborg-tech-challenge-production.up.railway.app
 
-## Features
-- Google OAuth 2.0 authentication
-- User profile creation, reading, and updating
-- JWT token-based authorization
-- Persistent sessions
-- TypeScript throughout
+## What this does
+- Google OAuth 2.0 sign-in with JWT session
+- Profile view/edit (full name, links, motivation, challenge URL)
+- Authenticated API with NestJS + TypeORM
 
-## Tech Stack
-- **Frontend**: Next.js 14, React, TypeScript
-- **Backend**: NestJS, TypeScript
-- **Database**: SQLite with TypeORM
-- **Authentication**: Google OAuth, JWT
+## Tech
+- Frontend: Next.js (app router), React, TypeScript
+- Backend: NestJS, TypeORM
+- Auth: Google OAuth, JWT in HTTP-only cookie
+- DB: Railway Postgres in production; SQLite for local dev
 
-## Setup Instructions
+## Quick start (local)
 
-### Prerequisites
-- Node.js 20+
-- Google OAuth credentials (optional for test account)
+Backend (NestJS):
+```bash
+cd /workspaces/xborg-tech-challenge
+npm install
+cp .env.example .env
+# fill GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET / JWT_SECRET
+npm run start:dev
+```
 
-### Backend Setup
-1. Navigate to the backend directory:
+Frontend (Next.js):
+```bash
+cd /workspaces/xborg-tech-challenge/frontend
+npm install
+cp .env.example .env
+# set NEXT_PUBLIC_API_URL=http://localhost:3001
+npm run dev
+```
 
-   ```bash
-   cd backend
-   ```
+## Environment variables
 
-2. Install dependencies:
+Backend (.env):
+- GOOGLE_CLIENT_ID
+- GOOGLE_CLIENT_SECRET
+- JWT_SECRET
+- DATABASE_URL (Railway Postgres) or DATABASE_PATH (SQLite local)
+- FRONTEND_URL (e.g., https://xborg-tech-challenge-rose.vercel.app)
+- PORT (defaults 3001)
 
-   ```bash
-   npm install
-   ```
+Frontend (.env):
+- NEXT_PUBLIC_API_URL (e.g., https://xborg-tech-challenge-production.up.railway.app)
 
-3. Copy the example environment file and edit values as needed:
+## API
 
-   ```bash
-   cp .env.example .env
-   # edit .env and set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, JWT_SECRET, etc.
-   ```
+Auth
+- GET /auth/login/google – start OAuth
+- GET /auth/validate/google – OAuth callback
+- POST /auth/test-login – test account
 
-4. Start the development server:
+User
+- GET /user/profile – get current user
+- PUT /user/profile – update current user
 
-   ```bash
-   npm run start:dev
-   ```
+## Deploy
 
-### Frontend Setup
-1. Navigate to the frontend directory:
+Backend (Railway):
+1) Connect repo on Railway.  
+2) Set env vars: GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, JWT_SECRET, DATABASE_URL, FRONTEND_URL, PORT=3001, NODE_ENV=production.  
+3) Deploy (Dockerfile in root is used automatically).
 
-   ```bash
-   cd frontend
-   ```
+Frontend (Vercel):
+1) Import repo, set root to frontend.  
+2) Env: NEXT_PUBLIC_API_URL=https://xborg-tech-challenge-production.up.railway.app.  
+3) Build command npm run build, output .next.  
+4) Deploy.
 
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Copy the example environment file and edit if you need to override the API URL:
-
-   ```bash
-   cp .env.example .env
-   # If your backend runs on a non-default port set NEXT_PUBLIC_API_URL accordingly
-   ```
-
-4. Start the development server (default Next dev port is 3000; if that port is in use it will pick another port, e.g. 3002):
-
-   ```bash
-   npm run dev
-   # or to force a specific port: PORT=3002 npm run dev
-   ```
-
-## API Endpoints
-
-### Authentication
-- \GET /auth/login/google\ - Initiate Google OAuth login
-- \GET /auth/validate/google\ - Validate Google OAuth callback
-
-### User Profile
-- \GET /user/profile\ - Get user profile (requires JWT)
-- \PUT /user/profile\ - Update user profile (requires JWT)
-
-## Project Structure
-\\\
-xborg-tech-challenge/
-├── backend/
-│   ├── src/
-│   │   ├── auth/          # Authentication module
-│   │   ├── user/          # User profile module
-│   │   └── app.module.ts  # Main application module
-│   ├── package.json
-│   └── tsconfig.json
-├── frontend/
-│   ├── app/
-│   │   ├── auth/          # Authentication pages
-│   │   ├── profile/       # Profile page
-│   │   └── layout.tsx     # Root layout
-│   ├── components/        # React components
-│   ├── package.json
-│   └── tsconfig.json
-└── README.md
-\\\
-
-## Environment Variables
-We include example env files for both services:
-
-- [backend/.env.example](backend/.env.example) — copy to `backend/.env` and set values
-- [frontend/.env.example](frontend/.env.example) — copy to `frontend/.env` (sets `NEXT_PUBLIC_API_URL`)
-
-Important variables:
-
-- `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` — OAuth credentials (optional for test login)
-- `JWT_SECRET` — Use a strong secret in production
-- `DATABASE_PATH` — SQLite file location for local dev
+## Project structure (excerpt)
+- src/... – NestJS backend
+- frontend/app/... – Next.js app router pages
+- frontend/contexts/AuthContext.tsx – auth state
+- frontend/lib/api.ts – API client
 
 ## Testing
-Run backend tests (if implemented):
+- Backend: npm run test
+- Frontend: cd frontend && npm run test (if present)
 
-```bash
-cd backend
-npm test
-```
-
-Run frontend tests (if implemented):
-
-```bash
-cd frontend
-npm test
-```
-
-## Deployment
-
-### Backend Deployment (Railway)
-
-1. Go to [Railway.app](https://railway.app) and create an account
-2. Click "New Project" → "Deploy from GitHub repo"
-3. Select this repository
-4. Set environment variables in Railway:
-   - `GOOGLE_CLIENT_ID` (optional for testing)
-   - `GOOGLE_CLIENT_SECRET` (optional for testing)
-   - `JWT_SECRET`: `your-super-secret-jwt-key-change-in-production`
-   - `DATABASE_PATH`: `./database.sqlite`
-   - `PORT`: `3001`
-   - `FRONTEND_URL`: `https://your-frontend-url.vercel.app`
-   - `NODE_ENV`: `production`
-5. Railway will auto-deploy using the Dockerfile
-
-### Frontend Deployment (Vercel)
-
-1. Go to [Vercel.com](https://vercel.com) and create an account
-2. Click "New Project" → "Import Git Repository"
-3. Select this repository and configure:
-   - **Root Directory**: `frontend`
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `.next`
-4. Add environment variable:
-   - `NEXT_PUBLIC_API_URL`: `https://your-railway-backend-url.up.railway.app`
-5. Deploy
-
-### Testing Production
-
-Once both are deployed:
-1. Visit your Vercel frontend URL
-2. Click "Sign in with Test Account"
-3. Should work with the deployed backend
-
-## License
-MIT
-# Deployment trigger for FRONTEND_URL update
+## Notes
+- Production uses hard redirect to /profile after OAuth callback for reliability.
+- CORS is configured for Vercel frontend, Railway backend, and localhost:3000.

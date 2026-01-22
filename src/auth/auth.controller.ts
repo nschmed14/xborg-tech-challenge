@@ -87,4 +87,39 @@ export class AuthController {
       });
     }
   }
+
+  @Get('debug/oauth')
+  debugOAuth() {
+    const clientID = this.configService.get('GOOGLE_CLIENT_ID');
+    const callbackURL = this.configService.get('GOOGLE_CALLBACK_URL');
+    const frontendUrl = process.env.FRONTEND_URL;
+    
+    return {
+      message: 'OAuth Debug Information',
+      googleOAuthSetup: {
+        clientIdConfigured: !!clientID,
+        clientIdLength: clientID?.length || 0,
+        callbackURL: callbackURL || 'Not set (will be auto-generated)',
+        frontendURL: frontendUrl || 'Not set (using fallback)',
+      },
+      expectedFlow: {
+        step1: 'Frontend user clicks "Sign in with Google"',
+        step2: 'Frontend redirects to: https://xborg-tech-challenge-production.up.railway.app/auth/login/google',
+        step3: 'Backend redirects to Google OAuth page',
+        step4: 'User authenticates with Google',
+        step5: 'Google redirects back to callback URL',
+        step6: 'Backend validates token and generates JWT',
+        step7: 'Backend redirects to frontend callback with token and user data',
+        step8: 'Frontend stores token and redirects to profile',
+      },
+      googleConsoleChecklist: {
+        redirectUriConfigured: 'https://xborg-tech-challenge-production.up.railway.app/auth/validate/google',
+        authorizedJavaScriptOrigins: [
+          'http://localhost:3000',
+          'https://xborg-tech-challenge-rose.vercel.app',
+        ],
+      },
+    };
+  }
 }
+

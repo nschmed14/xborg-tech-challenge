@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -11,13 +11,17 @@ export default function AuthCallbackPage() {
   const { login } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const [isClient, setIsClient] = useState(false);
+  const processedRef = useRef(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   useEffect(() => {
-    if (!isClient) return;
+    if (!isClient || processedRef.current) return;
+
+    // Mark as processed to prevent duplicate execution
+    processedRef.current = true;
 
     console.log('=== CALLBACK PAGE DEBUG ===');
     console.log('Window location:', window.location.href);
@@ -43,34 +47,27 @@ export default function AuthCallbackPage() {
         console.log('✓ Successfully parsed user data:', userData);
         console.log('✓ Calling login function with token and user data');
         login(token, userData);
-        console.log('✓ Login function called, now redirecting to /profile');
+        console.log('✓ Login function called');
         
-        // Use replace instead of push to prevent back button issues
-        // Use a small delay to ensure state is updated
-        setTimeout(() => {
-          console.log('✓ Executing redirect to /profile');
-          router.replace('/profile');
-        }, 100);
+        console.log('✓ Executing redirect to /profile immediately');
+        // Use window.location for guaranteed redirect
+        window.location.href = '/profile';
       } catch (error) {
         console.error('❌ Error parsing user data:', error);
         setError('Invalid authentication response');
         setTimeout(() => {
-          router.push('/auth/signin?error=invalid_response');
+          window.location.href = '/auth/signin?error=invalid_response';
         }, 2000);
       }
     } else {
       console.error('❌ Missing authentication parameters');
       console.log('Backend did not send token and user parameters');
-      console.log('This usually means:');
-      console.log('  1. Google OAuth callback URL is not configured in Google Console');
-      console.log('  2. Google auth failed and user was not returned from Google');
-      console.log('  3. Backend callback did not execute properly');
       setError('Missing authentication parameters');
       setTimeout(() => {
-        router.push('/auth/signin?error=missing_params');
+        window.location.href = '/auth/signin?error=missing_params';
       }, 2000);
     }
-  }, [isClient, login, router]);
+  }, [isClient, login]);
 
   if (!isClient) {
     return (

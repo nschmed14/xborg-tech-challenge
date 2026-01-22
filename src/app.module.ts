@@ -9,12 +9,13 @@ import { LoggingMiddleware } from './auth/logging.middleware';
 const getTypeOrmConfig = (): TypeOrmModuleOptions => {
   const isProduction = process.env.NODE_ENV === 'production';
   const isDevelopment = process.env.NODE_ENV === 'development' || !isProduction;
+  const shouldSync = process.env.TYPEORM_SYNC === 'true' || isDevelopment || isProduction;
   
   const baseConfig = {
     entities: [__dirname + '/**/*.entity{.ts,.js}'],
-    synchronize: isDevelopment, // Only sync in development
-    logging: false, // Disable logging to speed up startup
-    cache: true, // Enable caching
+    synchronize: shouldSync, // Keep schema in sync for this challenge
+    logging: false,
+    cache: true,
   };
 
   // Check if DATABASE_URL is set and not empty

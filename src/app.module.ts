@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { AppController } from './app.controller';
 import { LoggingMiddleware } from './auth/logging.middleware';
 
 const getTypeOrmConfig = (): TypeOrmModuleOptions => {
@@ -26,14 +27,16 @@ const getTypeOrmConfig = (): TypeOrmModuleOptions => {
       ssl: { rejectUnauthorized: false },
       // Aggressive connection settings for Railway
       extra: {
-        max: 3,
-        min: 0,
-        idleTimeoutMillis: 10000,
-        connectionTimeoutMillis: 3000,
-        statement_timeout: 5000,
+        max: 5,
+        min: 1,
+        idleTimeoutMillis: 30000,
+        connectionTimeoutMillis: 5000,
       },
       // Don't wait for database to be fully ready
       keepConnectionAlive: true,
+      retryAttempts: 3,
+      retryDelay: 1000,
+      autoLoadEntities: true,
     } as TypeOrmModuleOptions;
   }
 
@@ -55,6 +58,7 @@ const getTypeOrmConfig = (): TypeOrmModuleOptions => {
     AuthModule,
     UserModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

@@ -8,6 +8,7 @@ async function bootstrap() {
     
     const app = await NestFactory.create(AppModule, {
       logger: console, // Use full logger to see all output
+      abortOnError: false, // Don't abort if there are non-critical errors
     });
     
     // Get CORS origin from environment
@@ -23,8 +24,10 @@ async function bootstrap() {
     // Railway provides PORT environment variable
     const port = process.env.PORT || 3001;
     
+    // Bind to 0.0.0.0 to accept connections from anywhere
     const server = await app.listen(port, '0.0.0.0');
     console.log(`✓ Server listening on port ${port}`);
+    console.log(`✓ Health endpoint available at /health`);
     console.log(`✓ Ready to accept requests`);
     
     // Set server timeouts

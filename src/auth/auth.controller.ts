@@ -35,17 +35,11 @@ export class AuthController {
   @UseGuards(AuthGuard('google'))
   async googleAuthCallback(@Req() req, @Res() res: Response) {
     try {
-      console.log('🔍 Google OAuth callback received');
-      console.log('Request user:', req.user);
-      
       if (!req.user) {
         console.error('❌ No user returned from Google OAuth');
         throw new Error('Failed to authenticate with Google - no user data returned');
       }
-      
-      console.log('✓ User authenticated:', req.user.email);
       const result = await this.authService.login(req.user);
-      console.log('✓ User logged in, token generated:', result.access_token.substring(0, 20) + '...');
       
       // Determine frontend URL from multiple sources
       let frontendUrl = process.env.FRONTEND_URL;
@@ -53,13 +47,10 @@ export class AuthController {
       // If not set or looks like old URL, use the Vercel production URL
       if (!frontendUrl || frontendUrl.includes('frontend-ten-liard')) {
         frontendUrl = 'https://xborg-tech-challenge-rose.vercel.app';
-        console.log('Using hardcoded Vercel URL:', frontendUrl);
       }
       
       const userParam = encodeURIComponent(JSON.stringify(result.user));
       const redirectUrl = `${frontendUrl}/auth/callback?token=${result.access_token}&user=${userParam}`;
-      
-      console.log('✓ Redirecting to:', redirectUrl);
       res.redirect(redirectUrl);
     } catch (error) {
       console.error('❌ Google OAuth callback error:', error.message);
@@ -69,7 +60,6 @@ export class AuthController {
         frontendUrl = 'https://xborg-tech-challenge-rose.vercel.app';
       }
       const errorUrl = `${frontendUrl}/auth/signin?error=${encodeURIComponent(error.message)}`;
-      console.error('Redirecting to error page:', errorUrl);
       res.redirect(errorUrl);
     }
   }

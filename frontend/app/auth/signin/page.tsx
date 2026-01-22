@@ -19,12 +19,10 @@ export default function SignInPage() {
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
   const handleGoogleLogin = () => {
-    console.log('Google login clicked, redirecting to', `${API_URL}/auth/login/google`);
     window.location.assign(`${API_URL}/auth/login/google`);
   };
 
   const handleTestLogin = () => {
-    console.log('Test login clicked, redirecting to local API route');
     window.location.assign('/api/auth/test-login');
   };
 

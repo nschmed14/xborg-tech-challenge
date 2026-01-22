@@ -55,9 +55,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const currentToken = Cookies.get('auth_token');
         if (currentToken) {
           config.headers.Authorization = `Bearer ${currentToken}`;
-          console.log('Adding auth header to request:', config.url);
-        } else {
-          console.log('No auth token found for request:', config.url);
         }
         return config;
       },
@@ -81,14 +78,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const fetchUserProfile = async (userToken: string) => {
-    console.log('fetchUserProfile called with token:', userToken.substring(0, 20) + '...');
     try {
       const response = await api.get('/user/profile', {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
       });
-      console.log('fetchUserProfile response:', response.data);
       setUser(response.data);
     } catch (error) {
       console.error('Failed to fetch user profile:', error);
@@ -99,28 +94,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const login = (newToken: string, userData: any) => {
-    console.log('=== AUTH CONTEXT LOGIN ===');
-    console.log('Input token:', newToken.substring(0, 30) + '...');
-    console.log('Input user data:', userData);
-    
     try {
-      console.log('Setting cookie with auth_token...');
       Cookies.set('auth_token', newToken, { expires: 7 });
-      console.log('✓ Cookie set successfully');
-      
-      console.log('Setting token state...');
       setToken(newToken);
-      console.log('✓ Token state set');
-      
-      console.log('Setting user state...');
       setUser(userData);
-      console.log('✓ User state set:', userData);
-      
-      console.log('Setting isLoading to false...');
       setIsLoading(false);
-      console.log('✓ isLoading set to false');
-      
-      console.log('✓ Login complete - user should now be set and redirect should trigger');
     } catch (err) {
       console.error('❌ Error in login function:', err);
       throw err;

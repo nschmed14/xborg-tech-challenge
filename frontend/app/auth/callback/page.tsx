@@ -23,33 +23,15 @@ export default function AuthCallbackPage() {
     // Mark as processed to prevent duplicate execution
     processedRef.current = true;
 
-    console.log('=== CALLBACK PAGE DEBUG ===');
-    console.log('Window location:', window.location.href);
-    console.log('Window search:', window.location.search);
-
     // Get token and user from URL query params
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     const userParam = urlParams.get('user');
 
-    console.log('URL Params received:', {
-      hasToken: !!token,
-      tokenLength: token?.length || 0,
-      tokenPreview: token ? token.substring(0, 50) + '...' : 'null',
-      hasUserParam: !!userParam,
-      userParamLength: userParam?.length || 0,
-      userParamPreview: userParam ? userParam.substring(0, 100) + '...' : 'null',
-    });
-
     if (token && userParam) {
       try {
         const userData = JSON.parse(decodeURIComponent(userParam));
-        console.log('✓ Successfully parsed user data:', userData);
-        console.log('✓ Calling login function with token and user data');
         login(token, userData);
-        console.log('✓ Login function called');
-        
-        console.log('✓ Executing redirect to /profile immediately');
         // Use window.location for guaranteed redirect
         window.location.href = '/profile';
       } catch (error) {
@@ -61,7 +43,6 @@ export default function AuthCallbackPage() {
       }
     } else {
       console.error('❌ Missing authentication parameters');
-      console.log('Backend did not send token and user parameters');
       setError('Missing authentication parameters');
       setTimeout(() => {
         window.location.href = '/auth/signin?error=missing_params';

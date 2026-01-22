@@ -190,7 +190,7 @@ export default function ProfilePage() {
                   name="full_name"
                   value={profile.full_name}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 placeholder-gray-600"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-gray-900 placeholder-gray-600"
                   placeholder="Your full name"
                 />
               ) : (
@@ -206,7 +206,7 @@ export default function ProfilePage() {
                   name="github_url"
                   value={profile.github_url}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 placeholder-gray-600"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-gray-900 placeholder-gray-600"
                   placeholder="https://github.com/username"
                 />
               ) : (
@@ -228,7 +228,7 @@ export default function ProfilePage() {
                   name="resume_url"
                   value={profile.resume_url}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 placeholder-gray-600"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-gray-900 placeholder-gray-600"
                   placeholder="https://yourportfolio.dev"
                 />
               ) : (
@@ -257,7 +257,7 @@ export default function ProfilePage() {
                   value={profile.motivation}
                   onChange={handleInputChange}
                   rows={4}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 placeholder-gray-600"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-gray-900 placeholder-gray-600"
                   placeholder="Why you want to work at XBorg and why you're a good fit..."
                   minLength={50}
                 />
@@ -276,7 +276,7 @@ export default function ProfilePage() {
                   name="challenge_url"
                   value={profile.challenge_url}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 placeholder-gray-600"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-gray-900 placeholder-gray-600"
                   placeholder="https://github.com/username/xborg-challenge"
                 />
               ) : (

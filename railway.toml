@@ -6,5 +6,3 @@ buildCommand = "npm run build:all"
 startCommand = "bash start-railway.sh"
 healthcheckPath = "/health"
 healthcheckTimeout = 300
-restartPolicyType = "on_failure"
-restartPolicyMaxRetries = 3

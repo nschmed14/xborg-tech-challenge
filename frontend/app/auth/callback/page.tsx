@@ -19,25 +19,45 @@ export default function AuthCallbackPage() {
   useEffect(() => {
     if (!isClient) return;
 
+    console.log('=== CALLBACK PAGE DEBUG ===');
+    console.log('Window location:', window.location.href);
+    console.log('Window search:', window.location.search);
+
     // Get token and user from URL query params
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
     const userParam = urlParams.get('user');
 
+    console.log('URL Params received:', {
+      hasToken: !!token,
+      tokenLength: token?.length || 0,
+      tokenPreview: token ? token.substring(0, 50) + '...' : 'null',
+      hasUserParam: !!userParam,
+      userParamLength: userParam?.length || 0,
+      userParamPreview: userParam ? userParam.substring(0, 100) + '...' : 'null',
+    });
+
     if (token && userParam) {
       try {
         const userData = JSON.parse(decodeURIComponent(userParam));
-        console.log('Callback page: calling login with token and userData', userData);
+        console.log('✓ Successfully parsed user data:', userData);
+        console.log('✓ Calling login function with token and user data');
         login(token, userData);
+        console.log('✓ Login function called');
       } catch (error) {
-        console.error('Error parsing user data:', error);
+        console.error('❌ Error parsing user data:', error);
         setError('Invalid authentication response');
         setTimeout(() => {
           router.push('/auth/signin?error=invalid_response');
         }, 2000);
       }
     } else {
-      console.log('Callback page: missing token or userParam', { token: !!token, userParam: !!userParam });
+      console.error('❌ Missing authentication parameters');
+      console.log('Backend did not send token and user parameters');
+      console.log('This usually means:');
+      console.log('  1. Google OAuth callback URL is not configured in Google Console');
+      console.log('  2. Google auth failed and user was not returned from Google');
+      console.log('  3. Backend callback did not execute properly');
       setError('Missing authentication parameters');
       setTimeout(() => {
         router.push('/auth/signin?error=missing_params');

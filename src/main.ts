@@ -46,15 +46,7 @@ process.on('uncaughtException', (error) => {
   process.exit(1);
 });
 
-// Add timeout to prevent bootstrap from hanging
-const bootstrapTimeout = setTimeout(() => {
-  console.error('✗ Bootstrap timeout - application failed to start within 15 seconds');
-  process.exit(1);
-}, 15000);
-
 bootstrap().catch((error) => {
   console.error('Bootstrap failed:', error.message);
   process.exit(1);
-}).finally(() => {
-  clearTimeout(bootstrapTimeout);
 });

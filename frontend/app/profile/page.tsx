@@ -41,7 +41,14 @@ export default function ProfilePage() {
     try {
       setIsLoadingProfile(true);
       const response = await api.get('/user/profile');
-      setProfile(response.data);
+      // Ensure all fields are strings, not null
+      setProfile({
+        full_name: response.data.full_name || '',
+        github_url: response.data.github_url || '',
+        resume_url: response.data.resume_url || '',
+        motivation: response.data.motivation || '',
+        challenge_url: response.data.challenge_url || '',
+      });
     } catch (error) {
       console.error('Error fetching profile:', error);
     } finally {
@@ -64,7 +71,7 @@ export default function ProfilePage() {
   };
 
   const handleSave = async () => {
-    if (profile.motivation.length < 50) {
+    if ((profile.motivation || '').length < 50) {
       alert('Motivation must be at least 50 characters');
       return;
     }
@@ -240,7 +247,7 @@ export default function ProfilePage() {
                 Motivation (Min. 50 characters)
                 {isEditing && (
                   <span className="text-xs text-gray-600 ml-2">
-                    {profile.motivation.length}/50 characters
+                    {(profile.motivation || '').length}/50 characters
                   </span>
                 )}
               </label>
@@ -284,10 +291,10 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {isEditing && profile.motivation.length < 50 && (
+          {isEditing && (profile.motivation || '').length < 50 && (
             <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
               <p className="text-sm text-yellow-700">
-                Motivation must be at least 50 characters. Currently: {profile.motivation.length} characters.
+                Motivation must be at least 50 characters. Currently: {(profile.motivation || '').length} characters.
               </p>
             </div>
           )}

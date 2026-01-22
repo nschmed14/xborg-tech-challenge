@@ -166,13 +166,13 @@ export default function ProfilePage() {
               />
             ) : (
               <div className="h-16 w-16 rounded-full bg-gray-300 flex items-center justify-center">
-                <span className="text-2xl text-gray-600">
+                <span className="text-2xl text-gray-900">
                   {user?.full_name?.charAt(0) || user?.email?.charAt(0).toUpperCase()}
                 </span>
               </div>
             )}
             <div>
-              <h2 className="text-xl font-semibold">{user?.full_name || 'No name set'}</h2>
+              <h2 className="text-xl font-semibold text-gray-900">{user?.full_name || 'No name set'}</h2>
               <p className="text-gray-600">{user?.email}</p>
             </div>
           </div>

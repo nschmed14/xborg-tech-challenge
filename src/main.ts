@@ -11,14 +11,38 @@ async function bootstrap() {
       abortOnError: false, // Don't abort if there are non-critical errors
     });
     
-    // Get CORS origin from environment
-    const corsOrigin = process.env.CORS_ORIGIN || process.env.FRONTEND_URL || '*';
+    // Get CORS origin from environment - allow both old and new Vercel URLs
+    const corsOrigin = process.env.CORS_ORIGIN || process.env.FRONTEND_URL || 'https://xborg-tech-challenge-rose.vercel.app';
+    
+    console.log('CORS Origin configured:', corsOrigin);
     
     app.enableCors({
-      origin: corsOrigin === '*' ? corsOrigin : corsOrigin.split(','),
+      origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        // Allow the configured origins
+        const allowedOrigins = [
+          'https://xborg-tech-challenge-rose.vercel.app',
+          'https://frontend-ten-liard-73.vercel.app',
+          'http://localhost:3000',
+          corsOrigin
+        ];
+        
+        if (allowedOrigins.indexOf(origin) !== -1 || corsOrigin === '*') {
+          callback(null, true);
+        } else {
+          console.warn('CORS blocked origin:', origin);
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
       credentials: true,
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+      allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
+      exposedHeaders: ['Content-Length', 'Content-Type'],
+      maxAge: 86400, // 24 hours
+      preflightContinue: false,
+      optionsSuccessStatus: 204,
     });
     
     // Railway provides PORT environment variable

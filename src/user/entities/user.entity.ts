@@ -23,6 +23,9 @@ export class User {
   @Column({ nullable: true })
   resume_url: string;
 
+  @Column({ nullable: true })
+  portfolio_url: string;
+
   @Column({ type: 'text', nullable: true })
   motivation: string;
 

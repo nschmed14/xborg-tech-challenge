@@ -11,6 +11,7 @@ interface User {
   avatar_url: string;
   github_url: string;
   resume_url: string;
+  portfolio_url: string;
   motivation: string;
   challenge_url: string;
 }

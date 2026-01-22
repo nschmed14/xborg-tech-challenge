@@ -26,6 +26,11 @@ export class AuthService {
         email: user.email,
         full_name: user.full_name,
         avatar_url: user.avatar_url,
+        github_url: user.github_url,
+        resume_url: user.resume_url,
+        portfolio_url: user.portfolio_url,
+        motivation: user.motivation,
+        challenge_url: user.challenge_url,
       },
     };
   }
@@ -50,6 +55,11 @@ export class AuthService {
         email: user.email,
         full_name: user.full_name,
         avatar_url: user.avatar_url,
+        github_url: user.github_url,
+        resume_url: user.resume_url,
+        portfolio_url: user.portfolio_url,
+        motivation: user.motivation,
+        challenge_url: user.challenge_url,
       },
     };
   }

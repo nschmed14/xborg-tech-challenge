@@ -11,6 +11,7 @@ interface ProfileData {
   full_name: string;
   github_url: string;
   resume_url: string;
+  portfolio_url: string;
   motivation: string;
   challenge_url: string;
 }
@@ -25,6 +26,7 @@ export default function ProfilePage() {
     full_name: '',
     github_url: '',
     resume_url: '',
+    portfolio_url: '',
     motivation: '',
     challenge_url: '',
   });
@@ -46,6 +48,7 @@ export default function ProfilePage() {
         full_name: response.data.full_name || '',
         github_url: response.data.github_url || '',
         resume_url: response.data.resume_url || '',
+        portfolio_url: response.data.portfolio_url || '',
         motivation: response.data.motivation || '',
         challenge_url: response.data.challenge_url || '',
       });
@@ -221,7 +224,7 @@ export default function ProfilePage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-900">Resume/Portfolio URL</label>
+              <label className="block text-sm font-medium text-gray-900">Resume URL</label>
               {isEditing ? (
                 <input
                   type="url"
@@ -229,13 +232,35 @@ export default function ProfilePage() {
                   value={profile.resume_url}
                   onChange={handleInputChange}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-gray-900 placeholder-gray-600"
-                  placeholder="https://yourportfolio.dev"
+                  placeholder="https://example.com/resume.pdf"
                 />
               ) : (
                 <p className="mt-1 text-gray-900">
                   {profile.resume_url ? (
                     <a href={profile.resume_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                       {profile.resume_url}
+                    </a>
+                  ) : 'Not set'}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-900">Portfolio URL</label>
+              {isEditing ? (
+                <input
+                  type="url"
+                  name="portfolio_url"
+                  value={profile.portfolio_url}
+                  onChange={handleInputChange}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-gray-900 placeholder-gray-600"
+                  placeholder="https://yourportfolio.dev"
+                />
+              ) : (
+                <p className="mt-1 text-gray-900">
+                  {profile.portfolio_url ? (
+                    <a href={profile.portfolio_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                      {profile.portfolio_url}
                     </a>
                   ) : 'Not set'}
                 </p>

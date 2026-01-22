@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
-  experimental: {
-    turbopack: false,
+  // Hint turbopack/Next at the intended root to avoid monorepo lockfile warnings
+  turbopack: {
+    root: __dirname,
   },
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://xborg-tech-challenge-production.up.railway.app',

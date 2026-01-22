@@ -14,26 +14,25 @@ async function bootstrap() {
     // Get CORS origin from environment - allow both old and new Vercel URLs
     const corsOrigin = process.env.CORS_ORIGIN || process.env.FRONTEND_URL || 'https://xborg-tech-challenge-rose.vercel.app';
     
-    console.log('CORS Origin configured:', corsOrigin);
+    const allowedOrigins = [
+      'https://xborg-tech-challenge-rose.vercel.app',
+      'https://frontend-ten-liard-73.vercel.app',
+      'http://localhost:3000',
+    ];
+    
+    console.log('CORS allowed origins:', allowedOrigins);
     
     app.enableCors({
       origin: (origin, callback) => {
         // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
         
-        // Allow the configured origins
-        const allowedOrigins = [
-          'https://xborg-tech-challenge-rose.vercel.app',
-          'https://frontend-ten-liard-73.vercel.app',
-          'http://localhost:3000',
-          corsOrigin
-        ];
-        
-        if (allowedOrigins.indexOf(origin) !== -1 || corsOrigin === '*') {
+        // Check if origin is in allowed list
+        if (allowedOrigins.includes(origin) || corsOrigin === '*') {
           callback(null, true);
         } else {
           console.warn('CORS blocked origin:', origin);
-          callback(new Error('Not allowed by CORS'));
+          callback(null, false);
         }
       },
       credentials: true,

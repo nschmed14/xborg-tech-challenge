@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 
 export default function AuthCallbackPage() {
   const router = useRouter();
-  const { login, user } = useAuth();
+  const { login } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const [isClient, setIsClient] = useState(false);
 
@@ -43,7 +43,14 @@ export default function AuthCallbackPage() {
         console.log('✓ Successfully parsed user data:', userData);
         console.log('✓ Calling login function with token and user data');
         login(token, userData);
-        console.log('✓ Login function called');
+        console.log('✓ Login function called, now redirecting to /profile');
+        
+        // Use replace instead of push to prevent back button issues
+        // Use a small delay to ensure state is updated
+        setTimeout(() => {
+          console.log('✓ Executing redirect to /profile');
+          router.replace('/profile');
+        }, 100);
       } catch (error) {
         console.error('❌ Error parsing user data:', error);
         setError('Invalid authentication response');
@@ -64,14 +71,6 @@ export default function AuthCallbackPage() {
       }, 2000);
     }
   }, [isClient, login, router]);
-
-  // Separate effect to handle redirect after user is set
-  useEffect(() => {
-    if (user) {
-      console.log('Callback page: user set, redirecting to /profile');
-      router.push('/profile');
-    }
-  }, [user, router]);
 
   if (!isClient) {
     return (
